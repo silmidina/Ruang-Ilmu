@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
-
+// Modifikasi Input Error
 export default function NavLink({
     active = false,
     url = '#',
