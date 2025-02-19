@@ -1,13 +1,7 @@
 import { cn } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
 // Modifikasi Input Error
-export default function NavLinkResponsive({
-    active = false,
-    url = '#',
-    title,
-    icon:Icon,
-    ...props
-}) {
+export default function NavLinkResponsive({ active = false, url = '#', title, icon: Icon, ...props }) {
     return (
         <Link
             {...props}
@@ -19,7 +13,7 @@ export default function NavLinkResponsive({
                 'flex items-center gap-3 rounded-lg p-2 font-medium transition-all',
             )}
         >
-            <Icon className='w-4 h-4' />
+            <Icon className="h-4 w-4" />
             {title}
         </Link>
     );
