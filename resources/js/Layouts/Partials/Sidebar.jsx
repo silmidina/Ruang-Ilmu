@@ -21,7 +21,7 @@ import {
     IconVersions,
 } from '@tabler/icons-react';
 
-export default function Sidebar({url}) {
+export default function Sidebar({url, auth}) {
     return (
         <nav className="grid items-start px-2 text-sm font-semibold lg:px-4">
             <div className="px-3 py-2 text-sm font-semibold text-foreground">Dashboard</div>
