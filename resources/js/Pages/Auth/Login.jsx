@@ -1,6 +1,6 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import InputError from '@/Components/InputError';
-import { AlertDescription } from '@/Components/ui/alert';
+import { Alert, AlertDescription } from '@/Components/ui/alert';
 import { Button } from '@/Components/ui/button';
 import { Checkbox } from '@/Components/ui/checkbox';
 import { Input } from '@/Components/ui/input';
@@ -35,7 +35,7 @@ export default function Login({ status, canResetPassword }) {
                                     <AlertDescription>{status}</AlertDescription>
                                 </Alert>
                             )}
-                            <h1 className="text-3xl font-bold">LOGIN</h1>
+                            <h1 className="text-3xl font-bold">Login</h1>
                             <p className="text-balance text-muted-foreground">
                                 Masukkan email anda dibawah ini untuk masuk ke akun anda
                             </p>
@@ -49,9 +49,7 @@ export default function Login({ status, canResetPassword }) {
                                         type="email"
                                         name="email"
                                         value={data.email}
-                                        className="mt-1 block w-full"
                                         autoComplete="username"
-                                        isFocused={true}
                                         placeholder="Masukkan email anda"
                                         onChange={(e) => setData(e.target.name, e.target.value)}
                                     />
