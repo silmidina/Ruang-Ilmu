@@ -40,9 +40,7 @@ export default function ConfirmPassword() {
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
                         />
-                        {errors.password && (
-                            <InputError message={errors.password} />
-                        )}
+                        {errors.password && <InputError message={errors.password} />}
                     </div>
 
                     <div className="mt-4 flex items-center justify-end">
