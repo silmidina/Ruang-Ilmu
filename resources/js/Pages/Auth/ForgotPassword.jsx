@@ -34,8 +34,7 @@ export default function ForgotPassword({ status }) {
                                 )}
                                 <h1 className="text-3xl font-bold">Lupa Password</h1>
                                 <p className="text-balance text-muted-foreground">
-                                    Forgot your password? No problem. Just let us know your email address and we will
-                                    email you a password reset link that will allow you to choose a new one.
+                                Lupa kata sandi? Tidak masalah. Cukup beri tahu kami alamat email Anda dan kami akan mengirimkan tautan pengaturan ulang kata sandi melalui email yang akan memungkinkan Anda memilih kata sandi baru.
                                 </p>
                             </div>
 
