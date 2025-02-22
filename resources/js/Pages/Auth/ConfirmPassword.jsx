@@ -24,7 +24,7 @@ export default function ConfirmPassword() {
             <CardHeader>
                 <CardTitle>Konfirmasi Password</CardTitle>
                 <CardDescription>
-                    This is a secure area of the application. Please confirm your password before continuing.
+                    Ini adalah area aman dari aplikasi. Harap konfirmasikan kata sandi Anda sebelum melanjutkan.
                 </CardDescription>
             </CardHeader>
 
