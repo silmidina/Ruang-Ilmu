@@ -122,4 +122,4 @@ export default function Register() {
     );
 }
 
-Register.layout = (page) => <GuestLayout children={page} title="Daftar" />;
+Register.layout = (page) => <GuestLayout children={page} title="Register" />;

@@ -122,4 +122,4 @@ export default function Login({ status, canResetPassword }) {
     );
 }
 
-Login.layout = (page) => <GuestLayout children={page} title="login" />;
+Login.layout = (page) => <GuestLayout children={page} title="Login" />;
