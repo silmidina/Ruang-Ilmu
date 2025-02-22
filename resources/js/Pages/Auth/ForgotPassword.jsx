@@ -1,12 +1,10 @@
 import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import { Alert, AlertDescription } from '@/Components/ui/alert';
 import { Button } from '@/Components/ui/button';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
 import GuestLayout from '@/Layouts/GuestLayout';
-import { Link, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 
 export default function ForgotPassword({ status }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -34,7 +32,9 @@ export default function ForgotPassword({ status }) {
                                 )}
                                 <h1 className="text-3xl font-bold">Lupa Password</h1>
                                 <p className="text-balance text-muted-foreground">
-                                Lupa kata sandi? Tidak masalah. Cukup beri tahu kami alamat email Anda dan kami akan mengirimkan tautan pengaturan ulang kata sandi melalui email yang akan memungkinkan Anda memilih kata sandi baru.
+                                    Lupa kata sandi? Tidak masalah. Cukup beri tahu kami alamat email Anda dan kami akan
+                                    mengirimkan tautan pengaturan ulang kata sandi melalui email yang akan memungkinkan
+                                    Anda memilih kata sandi baru.
                                 </p>
                             </div>
 
@@ -42,18 +42,16 @@ export default function ForgotPassword({ status }) {
                                 <div className="grid gap-4">
                                     <div className="grid gap-2">
                                         <Label htmlFor="email">Email</Label>
-                                    <Input
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    value={data.email}
-                                    placeholder="Masukkan email anda"
-                                    autoComplete="username"
-                                    onChange={(e) => setData('email', e.target.value)}
-                                />
-                                {errors.email && (
-                                    <InputError message={errors.email}/>
-                                )}
+                                        <Input
+                                            id="email"
+                                            type="email"
+                                            name="email"
+                                            value={data.email}
+                                            placeholder="Masukkan email anda"
+                                            autoComplete="username"
+                                            onChange={(e) => setData('email', e.target.value)}
+                                        />
+                                        {errors.email && <InputError message={errors.email} />}
                                     </div>
                                     <Button
                                         type="submit"
@@ -64,9 +62,8 @@ export default function ForgotPassword({ status }) {
                                     >
                                         Email Password Reset Link
                                     </Button>
-                                </div> 
+                                </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
