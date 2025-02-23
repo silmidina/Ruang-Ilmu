@@ -1,10 +1,11 @@
+import ApplicationLogo from '@/Components/ApplicationLogo';
 import InputError from '@/Components/InputError';
 import { Alert, AlertDescription } from '@/Components/ui/alert';
 import { Button } from '@/Components/ui/button';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
 import GuestLayout from '@/Layouts/GuestLayout';
-import { useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 
 export default function ForgotPassword({ status }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -53,17 +54,31 @@ export default function ForgotPassword({ status }) {
                                         />
                                         {errors.email && <InputError message={errors.email} />}
                                     </div>
-                                    <Button
-                                        type="submit"
-                                        variant="orange"
-                                        size="xl"
-                                        className="w-full"
-                                        disabled={processing}
-                                    >
-                                        Email Password Reset Link
-                                    </Button>
+                                    <div className="flex justify-between gap-4">
+                                        <Link href={route('login')} className="w-full">
+                                            <Button
+                                                type="button"
+                                                size="xl"
+                                                className="w-full bg-gray-500 text-white hover:bg-gray-600"
+                                                disabled={processing}
+                                            >
+                                                Batal
+                                            </Button>
+                                        </Link>
+                                        <Button
+                                            type="submit"
+                                            variant="orange"
+                                            size="xl"
+                                            className="w-full"
+                                            disabled={processing}
+                                        >
+                                            Reset
+                                        </Button>
+                                    </div>
                                 </div>
                             </form>
+                            
+                       
                         </div>
                     </div>
                 </div>

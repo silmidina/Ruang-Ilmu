@@ -11,7 +11,7 @@ Route::redirect('/', 'login');
 Route::get('testing', fn() => inertia('Testing'));
 
 // Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::controller(DashboardController::class)->middleware(['auth'])->group(function () {
+Route::controller(DashboardController::class)->middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', 'index')->name('dashboard');
 });
 

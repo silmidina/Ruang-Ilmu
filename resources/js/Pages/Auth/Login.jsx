@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import InputError from '@/Components/InputError';
 import { Alert, AlertDescription } from '@/Components/ui/alert';
@@ -15,9 +17,15 @@ export default function Login({ status, canResetPassword }) {
         remember: false,
     });
 
+    // State untuk mengatur visibilitas password
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     const onHandleSubmit = (e) => {
         e.preventDefault();
-
         post(route('login'), {
             onFinish: () => reset('password'),
         });
@@ -42,6 +50,7 @@ export default function Login({ status, canResetPassword }) {
                         </div>
                         <form onSubmit={onHandleSubmit}>
                             <div className="grid gap-4">
+                                {/* Input Email */}
                                 <div className="grid gap-2">
                                     <Label htmlFor="email">Email</Label>
                                     <Input
@@ -55,8 +64,10 @@ export default function Login({ status, canResetPassword }) {
                                     />
                                     {errors.email && <InputError message={errors.email} />}
                                 </div>
+
+                                {/* Input Password dengan Icon Mata */}
                                 <div className="grid gap-2">
-                                    <div className="flex items-center">
+                                    <div className="flex items-center justify-between">
                                         <Label htmlFor="password">Password</Label>
                                         {canResetPassword && (
                                             <Link
@@ -67,30 +78,41 @@ export default function Login({ status, canResetPassword }) {
                                             </Link>
                                         )}
                                     </div>
-                                    <Input
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        autoComplete="new-password"
-                                        value={data.password}
-                                        onChange={(e) => setData(e.target.name, e.target.value)}
-                                    />
+                                    <div className="relative">
+                                        <Input
+                                            id="password"
+                                            name="password"
+                                            type={showPassword ? 'text' : 'password'}
+                                            autoComplete="current-password"
+                                            value={data.password}
+                                            onChange={(e) => setData(e.target.name, e.target.value)}
+                                        />
+                                        <button
+                                            type="button"
+                                            className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                                            onClick={togglePasswordVisibility}
+                                        >
+                                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                        </button>
+                                    </div>
                                     {errors.password && <InputError message={errors.password} />}
                                 </div>
+
+                                {/* Checkbox "Ingat Saya" */}
                                 <div className="grid gap-2">
-                                    <div className="items-top flex space-x-2">
+                                    <div className="flex items-center space-x-2">
                                         <Checkbox
                                             id="remember"
                                             name="remember"
                                             checked={data.remember}
-                                            onCheckedChange={(checked) => setData('remember_me', checked)}
+                                            onCheckedChange={(checked) => setData('remember', checked)}
                                         />
-                                        <div className="5 grid gap-1 leading-none">
-                                            <Label htmlFor="remember">Ingat Saya</Label>
-                                        </div>
+                                        <Label htmlFor="remember">Ingat Saya</Label>
                                     </div>
                                     {errors.remember && <InputError message={errors.remember} />}
                                 </div>
+
+                                {/* Tombol Submit */}
                                 <Button
                                     type="submit"
                                     variant="orange"
@@ -102,8 +124,10 @@ export default function Login({ status, canResetPassword }) {
                                 </Button>
                             </div>
                         </form>
+
+                        {/* Link ke Halaman Registrasi */}
                         <div className="mt-4 text-center text-sm">
-                            Belum Punya Akun? {''}
+                            Belum Punya Akun?{' '}
                             <Link href={route('register')} className="underline">
                                 Daftar
                             </Link>
@@ -111,6 +135,8 @@ export default function Login({ status, canResetPassword }) {
                     </div>
                 </div>
             </div>
+
+            {/* Gambar di Sisi Kanan */}
             <div className="hidden bg-muted lg:block">
                 <img
                     src="/images/login.webp"
