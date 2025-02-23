@@ -29,11 +29,10 @@ class CategoryRequest extends FormRequest
                 'max:255'
             ],
             'description' => [
-                'required',
-                'string'
+                'nullable',
             ],
             'cover' => [
-                'required',
+                'nullable',
                 'mimes:png,jpg,jpeg,webp',
                 'max:2048',
             ],
