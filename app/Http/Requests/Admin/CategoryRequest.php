@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequestcece extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,10 +29,11 @@ class CategoryRequestcece extends FormRequest
                 'max:255'
             ],
             'description' => [
-                'nullable',
+                'required',
+                'string'
             ],
             'cover' => [
-                'nullable',
+                'required',
                 'mimes:png,jpg,jpeg,webp',
                 'max:2048',
             ],

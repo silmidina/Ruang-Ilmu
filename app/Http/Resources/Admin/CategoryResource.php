@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
-class CategoryResourcece extends JsonResource
+class CategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

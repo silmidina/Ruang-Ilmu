@@ -54,7 +54,7 @@ export default function Index(props) {
                   <TableCell>{category.slug}</TableCell>
                   <TableCell>
                     <Avatar>
-                      <AvatarImage src={category.avatar} />
+                      <AvatarImage src={category.cover} />
                       <AvatarFallback>{category.name.substring(0,1) }</AvatarFallback>
                     </Avatar>
                   </TableCell>
