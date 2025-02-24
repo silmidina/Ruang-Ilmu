@@ -22,9 +22,13 @@ class CategoryController extends Controller
     {
         $categories = Category::query()
             ->select(['id', 'name', 'slug', 'cover', 'created_at'])
-            ->get();
+            ->paginate(10);
         return inertia('Admin/Categories/Index', [
-            'categories' => CategoryResource::collection($categories),
+            'categories' => CategoryResource::collection($categories)->additional([
+                'meta' => [
+                    'has_pages' => $categories->hasPages(),
+                ],
+            ]),
             'page_settings' => [
                 'title' => 'Kategori',
                 'subtitle' => 'Menampilkan semua data kategori yang tersedia pada platform ini.',
