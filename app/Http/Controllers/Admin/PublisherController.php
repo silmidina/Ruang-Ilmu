@@ -104,4 +104,17 @@ class PublisherController extends Controller
             return to_route('admin.publishers.index');
         }
     }
+
+    public function destroy(Publisher $publisher): RedirectResponse
+    {
+        try {
+            $this->delete_file($publisher, 'logo');
+            $publisher->delete();
+            flashMessage(MessageType::DELETED->message('Penerbit'));
+            return to_route('admin.publishers.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.publishers.index');
+        }
+    }
 }
