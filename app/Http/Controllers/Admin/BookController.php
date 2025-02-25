@@ -75,7 +75,10 @@ class BookController extends Controller
     {
         try {
             $book = Book::create([
-                'book_code' => str()->random(6),
+                'book_code' => $this->bookCode(
+                    $request->publication_year,
+                    $request->category_id,
+                ),
                 'title' => $title = $request->title,
                 'slug' => str()->lower(str()->slug($title) . str()->random(4)),
                 'author' => $request->author,
@@ -96,5 +99,20 @@ class BookController extends Controller
             flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
             return to_route('admin.books.index');
         }
+    }
+    private function bookCode(int $publication_year, int $category_id): string
+    {
+        $category = Category::find($category_id);
+        $last_book = Book::query()
+            ->orderByDesc('book_code')
+            ->first();
+
+        $order = 1;
+        if ($last_book) {
+            $last_order = (int) substr($last_book->book_code, -4);
+            $order = $last_order + 1;
+        }
+        $ordering = str_pad($order, 4, '0', STR_PAD_LEFT);
+        return 'CA' . $publication_year . '.' . str()->slug($category->name) . '.' . $ordering;
     }
 }
