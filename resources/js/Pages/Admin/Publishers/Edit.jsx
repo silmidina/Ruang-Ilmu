@@ -8,19 +8,20 @@ import { Textarea } from "@/Components/ui/textarea"
 import AppLayout from "@/Layouts/AppLayout"
 import { flashMessage } from "@/lib/utils"
 import { Link, useForm } from "@inertiajs/react"
-import { IconArrowLeft, IconBuildingCommunity, IconCategory } from "@tabler/icons-react"
+import { IconBuildingCommunity } from "@tabler/icons-react"
+import { IconArrowLeft, IconCategory } from "@tabler/icons-react"
 import { useRef } from "react"
 import { toast } from "sonner"
 
-export default function Create(props) { 
+export default function Edit(props) { 
 
   const fileInputLogo = useRef(null);
 
   const { data, setData, reset, post, processing, errors } = useForm({
-    name: '',
-    address: '',
-    email: '',
-    phone: '',
+    name: props.publisher.name ?? '',
+    address: props.publisher.address ?? '',
+    email: props.publisher.email ?? '',
+    phone: props.publisher.phone ?? '',
     logo: null,
     _method: props.page_settings.method,
   })
@@ -41,7 +42,7 @@ export default function Create(props) {
 
   const onHandleReset = () => { 
     reset();
-    fileInputLogo.current.value = null;
+    fileInputCover.current.value = null;
   }
 
   return (
@@ -77,42 +78,40 @@ export default function Create(props) {
               )}
             </div>
             <div className="grid w-full items-center gap-1 5">
-                          <Label htmlFor="address">Alamat</Label>
-                          <Textarea
-                            name="address"
-                            id="address"
-                            placeholder="Masukkan alamat..."
-                            value={data.address}
-                            onChange={onHandleChange}
-                          ></Textarea>
-                          {errors.address && (
-                            <InputError message={errors.address} />
-                          )}
+              <Label htmlFor="address">Alamat</Label>
+              <Textarea
+                name="address"
+                id="address"
+                placeholder="Masukkan alamat..."
+                value={data.address}
+                onChange={onHandleChange}
+              ></Textarea>
+              {errors.address && (
+                <InputError message={errors.address} />
+              )}
             </div>
             <div className="grid w-full items-center gap-1 5">
               <Label htmlFor="email">Email</Label>
-              <Input
+              <Textarea
                 name="email"
                 id="email"
-                type="email"
                 placeholder="Masukkan email..."
                 value={data.email}
                 onChange={onHandleChange}
-              />
+              ></Textarea>
               {errors.email && (
                 <InputError message={errors.email} />
               )}
             </div>
             <div className="grid w-full items-center gap-1 5">
               <Label htmlFor="phone">Nomor Handphone</Label>
-              <Input
+              <Textarea
                 name="phone"
                 id="phone"
-                type="phone"
                 placeholder="Masukkan nomor handphone..."
                 value={data.phone}
                 onChange={onHandleChange}
-              />
+              ></Textarea>
               {errors.phone && (
                 <InputError message={errors.phone} />
               )}
@@ -134,7 +133,7 @@ export default function Create(props) {
               <Button type="button" variant="ghost" size="lg" onClick={onHandleReset}>
                 Reset
               </Button>
-              <Button type="submit" variant="orange" size="lg" disabled={processing}>
+              <Button type="submit" variant="orange" size="lg">
                 Save
               </Button>
             </div>
@@ -144,4 +143,4 @@ export default function Create(props) {
   </div>
 )
 }
-Create.layout = (page) => <AppLayout children={page} title={page.props.page_settings.title} />
+Edit.layout = (page) => <AppLayout children={page} title={page.props.page_settings.title} />

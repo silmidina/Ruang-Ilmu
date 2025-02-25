@@ -72,4 +72,36 @@ class PublisherController extends Controller
             return to_route('admin.publishers.index');
         }
     }
+
+    public function edit(Publisher $publisher): Response
+    {
+        return inertia('Admin/Publishers/Edit', [
+            'page_settings' => [
+                'title' => 'Edit Penerbit',
+                'subtitle' => 'Edit data penerbit yang sudah ada di sini. Klik simpan setelah selesai.',
+                'method' => 'PUT',
+                'action' => route('admin.publishers.update', $publisher)
+            ],
+            'publisher' => $publisher,
+        ]);
+    }
+
+    public function update(PublisherRequest $request, Publisher $publisher): RedirectResponse
+    {
+        try {
+            $publisher->update([
+                'name' => $name = $request->name,
+                'slug' => $name === $publisher->name ? str()->lower(str()->slug($name) . str()->random(4)) : $publisher->slug,
+                'address' => $request->address,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'logo' => $this->update_file($request, $publisher, 'logo', 'publishers'),
+            ]);
+            flashMessage(MessageType::UPDATED->message('Penerbit'));
+            return to_route('admin.publishers.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.publishers.index');
+        }
+    }
 }
