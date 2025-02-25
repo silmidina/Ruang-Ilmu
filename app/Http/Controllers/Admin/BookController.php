@@ -172,4 +172,17 @@ class BookController extends Controller
             return to_route('admin.books.index');
         }
     }
+
+    public function destroy(Book $book): RedirectResponse
+    {
+        try {
+            $this->delete_file($book, 'cover');
+            $book->delete();
+            flashMessage(MessageType::DELETED->message('Buku'));
+            return to_route('admin.books.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.books.index');
+        }
+    }
 }
