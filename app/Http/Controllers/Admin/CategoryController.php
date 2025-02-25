@@ -24,6 +24,7 @@ class CategoryController extends Controller
             ->select(['id', 'name', 'slug', 'cover', 'created_at'])
             ->filter(request()->only(['search']))
             ->sorting(request()->only(['field', 'direction']))
+            ->latest('created_at')
             ->paginate(request()->load ?? 10)
             ->withQueryString();
         return inertia('Admin/Categories/Index', [

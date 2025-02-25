@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\MessageType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PublisherRequest;
 use App\Http\Resources\Admin\PublisherResource;
 use App\Models\Publisher;
+use App\Traits\HasFile;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Throwable;
 
 class PublisherController extends Controller
 {
+    use HasFile;
     public function index(): Response
     {
         $publishers = Publisher::query()
             ->select(['id', 'name', 'slug', 'address', 'email', 'phone', 'created_at'])
             ->filter(request()->only(['search']))
             ->sorting(request()->only(['field', 'direction']))
+            ->latest('created_at')
             ->paginate(request()->load ?? 10)
             ->withQueryString();
         return inertia('Admin/Publishers/Index', [
@@ -34,5 +41,35 @@ class PublisherController extends Controller
                 'load' => 10,
             ],
         ]);
+    }
+    public function create(): Response
+    {
+        return inertia('Admin/Publishers/Create', [
+            'page_settings' => [
+                'title' => 'Tambah Penerbit',
+                'subtitle' => 'Buat penerbit baru disini. Klik simpan setelah selesai.',
+                'method' => 'POST',
+                'action' => route('admin.publishers.store'),
+            ],
+        ]);
+    }
+
+    public function store(PublisherRequest $request): RedirectResponse
+    {
+        try {
+            Publisher::create([
+                'name' => $name = $request->name,
+                'slug' => str()->lower(str()->slug($name) . str()->random(4)),
+                'address' => $request->address,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'logo' => $this->upload_file($request, 'logo', 'publishers'),
+            ]);
+            flashMessage(MessageType::CREATED->message('Penerbit'));
+            return to_route('admin.publishers.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.publishers.index');
+        }
     }
 }
