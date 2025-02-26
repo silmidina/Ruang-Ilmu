@@ -44,6 +44,7 @@ class UserController extends Controller
             ],
         ]);
     }
+
     public function create(): Response
     {
         return inertia('Admin/Users/Create', [
@@ -66,11 +67,48 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make(request()->password),
                 'phone' => $request->phone,
-                'slug' => str()->lower(str()->slug($name) . str()->random(4)),
                 'avatar' => $this->upload_file($request, 'avatar', 'users'),
+                'gender' => $request->gender,
+                'date_of_birth' => $request->date_of_birth,
                 'address' => $request->address,
             ]);
             flashMessage(MessageType::CREATED->message('Pengguna'));
+            return to_route('admin.users.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.users.index');
+        }
+    }
+
+    public function edit(User $user): Response
+    {
+        return inertia('Admin/Users/Edit', [
+            'page_settings' => [
+                'title' => 'Edit Pengguna',
+                'subtitle' => 'Edit pengguna baru disini. Klik simpan setelah selesai.',
+                'method' => 'PUT',
+                'action' => route('admin.users.update', $user),
+            ],
+            'genders' => UserGender::options(),
+            'user' => $user,
+        ]);
+    }
+
+    public function update(User $user, UserRequest $request): RedirectResponse
+    {
+        try {
+            $user->update([
+                'name' => $name = $request->name,
+                'username' => usernameGenerator($name),
+                'email' => $request->email,
+                'password' => Hash::make(request()->password),
+                'phone' => $request->phone,
+                'avatar' => $this->update_file($request, $user, 'avatar', 'users'),
+                'gender' => $request->gender,
+                'date_of_birth' => $request->date_of_birth,
+                'address' => $request->address,
+            ]);
+            flashMessage(MessageType::UPDATED->message('Pengguna'));
             return to_route('admin.users.index');
         } catch (Throwable $e) {
             flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
