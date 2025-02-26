@@ -82,56 +82,56 @@ export default function Edit(props) {
             </div>
             <div className="grid w-full items-center gap-1 5">
               <Label htmlFor="email">Email</Label>
-              <Textarea
+              <Input
                 name="email"
                 id="email"
                 type="email"
                 placeholder="Masukkan email..."
                 value={data.email}
                 onChange={onHandleChange}
-              ></Textarea>
+              />
               {errors.email && (
                 <InputError message={errors.email} />
               )}
             </div>
             <div className="grid w-full items-center gap-1 5">
               <Label htmlFor="password">Password</Label>
-              <Textarea
+              <Input
                 name="password"
                 id="password"
                 type="password"
                 placeholder="Masukkan password..."
                 value={data.password}
                 onChange={onHandleChange}
-              ></Textarea>
+              />
               {errors.password && (
                 <InputError message={errors.password} />
               )}
             </div>
             <div className="grid w-full items-center gap-1 5">
               <Label htmlFor="password_confirmation">Konfirmasi Password</Label>
-              <Textarea
+              <Input
                 name="password_confirmation"
                 id="password_confirmation"
                 type="password"
                 placeholder="Masukkan konfirmasi password..."
                 value={data.password_confirmation}
                 onChange={onHandleChange}
-              ></Textarea>
+              />
               {errors.password_confirmation && (
                 <InputError message={errors.password_confirmation} />
               )}
             </div>
             <div className="grid w-full items-center gap-1 5">
               <Label htmlFor="phone">Nomor Handphone</Label>
-              <Textarea
+              <Input
                 name="phone"
                 id="phone"
                 type="text"
                 placeholder="Masukkan nomor handphone..."
                 value={data.phone}
                 onChange={onHandleChange}
-              ></Textarea>
+              />
               {errors.phone && (
                 <InputError message={errors.phone} />
               )}

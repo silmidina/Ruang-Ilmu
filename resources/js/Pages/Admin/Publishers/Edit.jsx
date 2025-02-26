@@ -92,26 +92,26 @@ export default function Edit(props) {
             </div>
             <div className="grid w-full items-center gap-1 5">
               <Label htmlFor="email">Email</Label>
-              <Textarea
+              <Input
                 name="email"
                 id="email"
                 placeholder="Masukkan email..."
                 value={data.email}
                 onChange={onHandleChange}
-              ></Textarea>
+              />
               {errors.email && (
                 <InputError message={errors.email} />
               )}
             </div>
             <div className="grid w-full items-center gap-1 5">
               <Label htmlFor="phone">Nomor Handphone</Label>
-              <Textarea
+              <Input
                 name="phone"
                 id="phone"
                 placeholder="Masukkan nomor handphone..."
                 value={data.phone}
                 onChange={onHandleChange}
-              ></Textarea>
+              />
               {errors.phone && (
                 <InputError message={errors.phone} />
               )}
