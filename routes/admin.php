@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FineSettingController;
 use App\Http\Controllers\Admin\LoanController;
 use App\Http\Controllers\Admin\PublisherController;
+use App\Http\Controllers\Admin\ReturnBookController;
 use App\Http\Controllers\Admin\UserController;
 use App\Models\Publisher;
 use Illuminate\Support\Facades\Route;
@@ -58,5 +59,12 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('loans/edit/{loan}', 'edit')->name('admin.loans.edit');
     Route::put('loans/edit/{loan}', 'update')->name('admin.loans.update');
     Route::delete('loans/destroy/{loan}', 'destroy')->name('admin.loans.destroy');
+  });
+
+  Route::controller(ReturnBookController::class)->group(function () {
+    Route::get('return-books', 'index')->name('admin.return-books.index');
+    Route::get('return-books/{loan:loan_code}/create', 'create')->name('admin.return-books.create');
+    Route::put('return-books/{loan:loan_code}/create', 'store')->name('admin.return-books.store');
+    Route::put('return-books/{returnBook:return_book_code}/approve', 'approve')->name('admin.return-books.approve');
   });
 });
