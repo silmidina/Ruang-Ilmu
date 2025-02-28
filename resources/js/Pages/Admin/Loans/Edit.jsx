@@ -14,11 +14,11 @@ import { IconArrowDownCircle, IconArrowLeft, IconArrowUpCircle, IconBooks, IconC
 import { useRef } from "react"
 import { toast } from "sonner"
 
-export default function Create(props) { 
+export default function Edit(props) { 
 
   const { data, setData, reset, post, processing, errors } = useForm({
-    user: null,
-    book: null,
+    user: props.page_data.loan.user.name ?? null,
+    book: props.page_data.loan.book.title ?? null,
     loan_date: props.page_data.date.loan_date,
     due_date: props.page_data.date.due_date,
     _method: props.page_settings.method,
@@ -94,4 +94,4 @@ export default function Create(props) {
   </div>
 )
 }
-Create.layout = (page) => <AppLayout children={page} title={page.props.page_settings.title} />
+Edit.layout = (page) => <AppLayout children={page} title={page.props.page_settings.title} />
