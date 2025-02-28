@@ -18,7 +18,7 @@ class LoanResource extends JsonResource
             'id' => $this->id,
             'loan_code' => $this->loan_code,
             'loan_date' => $this->loan_date->format('d M Y'),
-            'dua_date' => $this->dua_date->format('d M Y'),
+            'due_date' => $this->due_date->format('d M Y'),
             'created_at' => $this->created_at->format('d M Y'),
             'has_return_book' => $this->returnBook()->exists(),
             'user' => $this->whenLoaded('user', [
