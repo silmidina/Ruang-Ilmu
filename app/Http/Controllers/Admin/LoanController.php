@@ -41,7 +41,7 @@ class LoanController extends Controller
             ]),
             'state' => [
                 'page' => request()->page ?? 1,
-                'search' => request()->page ?? '',
+                'search' => request()->search ?? '',
                 'load' => 10
             ],
         ]);
@@ -152,6 +152,18 @@ class LoanController extends Controller
                 'book_id' => $book->id,
             ]);
             flashMessage(MessageType::UPDATED->message('peminjaman'));
+            return to_route('admin.loans.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.loans.index');
+        }
+    }
+
+    public function destroy(Loan $loan): RedirectResponse
+    {
+        try {
+            $loan->delete();
+            flashMessage(MessageType::DELETED->message('Peminjaman'));
             return to_route('admin.loans.index');
         } catch (Throwable $e) {
             flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');

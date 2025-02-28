@@ -214,16 +214,15 @@ export default function Index(props) {
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction onClick={() => 
-              console.log('hapus peminjaman')
-                // router.delete(
-                //   route('admin.loans.destroy', [loan]), {
-                //     preserveScroll: true,
-                //     preserveState: true,
-                //     onSuccess: (success) => {
-                //       const flash = flashMessage(success);
-                //       if (flash) toast[flash.type](flash.message);
-                //     },
-                //   })
+                 router.delete(
+                   route('admin.loans.destroy', [loan]), {
+                     preserveScroll: true,
+                     preserveState: true,
+                     onSuccess: (success) => {
+                       const flash = flashMessage(success);
+                       if (flash) toast[flash.type](flash.message);
+                     },
+                   })
               }>
                 Continue
               </AlertDialogAction>
