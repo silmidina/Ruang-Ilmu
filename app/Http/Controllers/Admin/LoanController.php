@@ -95,14 +95,18 @@ class LoanController extends Controller
                 return to_route('admin.loans.index');
             }
 
-            Loan::create([
-                'loan_code' => str()->lower(str()->random(10)),
-                'user_id' => $user->id,
-                'book_id' => $book->id,
-                'loan_date' => Carbon::now()->toDateString(),
-                'due_date' => Carbon::now()->addDays(7)->toDateString(),
-            ]);
-            flashMessage(MessageType::CREATED->message('peminjaman'));
+            $book->stock->available > 0
+                ? tap(Loan::create([
+                    'loan_code' => str()->lower(str()->random(10)),
+                    'user_id' => $user->id,
+                    'book_id' => $book->id,
+                    'loan_date' => Carbon::now()->toDateString(),
+                    'due_date' => Carbon::now()->addDays(7)->toDateString(),
+                ]), function ($loan) {
+                    $loan->book->stock_loan();
+                    flashMessage('Berhasil menambahkan peminjaman');
+                })
+                : flashMessage('Stok Buku tidak tersedia!', 'error');
             return to_route('admin.loans.index');
         } catch (Throwable $e) {
             flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
