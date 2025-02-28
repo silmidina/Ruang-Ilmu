@@ -59,4 +59,13 @@ class Loan extends Model
             $query->orderBy($sorts['field'], $sorts['direction']);
         });
     }
+
+    public static function checkLoanBook(int $user_id, int $book_id): bool
+    {
+        return self::query()
+            ->where('user_id', $user_id)
+            ->where('book_id', $book_id)
+            ->whereDoesntHave('returnBook', fn($query) => $query->where('book_id', $book_id)->where('user_id', $user_id))
+            ->exists();
+    }
 }
