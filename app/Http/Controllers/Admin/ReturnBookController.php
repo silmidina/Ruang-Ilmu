@@ -16,6 +16,7 @@ use App\Models\ReturnBookCheck;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Response;
 use Throwable;
 
@@ -80,6 +81,9 @@ class ReturnBookController extends Controller
     public function store(Loan $loan, ReturnBookRequest $request): RedirectResponse
     {
         try {
+
+            DB::beginTransaction();
+
             $return_book = $loan->returnBook()->create([
                 'return_book_code' => str()->lower(str()->random(10)),
                 'book_id' => $loan->book_id,
@@ -102,6 +106,9 @@ class ReturnBookController extends Controller
             $daysLate = $return_book->getDaysLate();
 
             $fineData = $this->calculateFine($return_book, $return_book_check, FineSetting::first(), $daysLate);
+
+            DB::commit();
+
             if ($isOnTime) {
                 if ($fineData) {
                     flashMessage($fineData['message'], 'error');
@@ -119,6 +126,7 @@ class ReturnBookController extends Controller
             flashMessage('Berhasil mengembalikan buku.');
             return to_route('admin.return-books.index');
         } catch (Throwable $e) {
+            DB::rollBack();
             flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
             return to_route('admin.loans.index');
         }
