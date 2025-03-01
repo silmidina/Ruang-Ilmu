@@ -37,6 +37,11 @@ class ReturnBook extends Model
         return $this->belongsTo(Book::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function fine(): HasOne
     {
         return $this->hasOne(Fine::class);

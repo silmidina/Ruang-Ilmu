@@ -59,7 +59,7 @@ export default function Edit(props) {
         <Button variant="orange" size="lg" asChild>
           <Link href={route('admin.users.index')}>
             <IconArrowLeft className="size-4" />
-            Kembali
+            Back
           </Link>
         </Button>
       </div>

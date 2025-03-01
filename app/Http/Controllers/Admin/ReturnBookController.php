@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\MessageType;
 use App\Enums\ReturnBookCondition;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ReturnBookRequest;
 use App\Http\Resources\Admin\ReturnBookResource;
 use App\Models\FineSetting;
 use App\Models\Loan;
@@ -12,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Throwable;
 
 class ReturnBookController extends Controller
 {
@@ -46,7 +49,7 @@ class ReturnBookController extends Controller
 
     public function create(Loan $loan): Response|RedirectResponse
     {
-        if ($loan->returnBook()->exist()) {
+        if ($loan->returnBook()->exists()) {
             return to_route('admin.loans.index');
         }
 
@@ -69,5 +72,26 @@ class ReturnBookController extends Controller
             ],
             'conditions' => ReturnBookCondition::options(),
         ]);
+    }
+
+    public function store(Loan $loan, ReturnBookRequest $request): RedirectResponse
+    {
+        try {
+            $return_book = $loan->returnBook()->create([
+                'return_book_code' => str()->lower(str()->random(10)),
+                'book_id' => $loan->book_id,
+                'user_id' => $loan->user_id,
+                'return_date' => Carbon::today(),
+            ]);
+            $return_book_check = $return_book->returnBookCheck()->create([
+                'condition' => $request->condition,
+                'notes' => $request->notes,
+            ]);
+            flashMessage('Berhasil mengembalikan buku.');
+            return to_route('admin.return-books.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.loans.index');
+        }
     }
 }

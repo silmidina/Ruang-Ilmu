@@ -1,7 +1,7 @@
 import HeaderTitle from "@/Components/HeaderTitle"
 import InputError from "@/Components/InputError"
 import { Button } from "@/Components/ui/button"
-import { Card, CardContent, CardHeader } from "@/Components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card"
 import { Input } from "@/Components/ui/input"
 import { Label } from "@/Components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select"
@@ -15,7 +15,7 @@ import { toast } from "sonner"
 
 export default function Create(props) { 
 
-  const { data, setData, reset, post, processing, errors } = useForm({
+  const { data, setData, reset, put, processing, errors } = useForm({
     loan_date: props.loan.loan_date,
     loan_code: props.loan.loan_code,
     due_date: props.loan.due_date,
@@ -29,7 +29,7 @@ export default function Create(props) {
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
-    post(props.page_settings.action, {
+    put(props.page_settings.action, {
       preserveScroll: true,
       preserveState: true,
       onSuccess: (success) => {
@@ -54,7 +54,7 @@ export default function Create(props) {
         <Button variant="orange" size="lg" asChild>
           <Link href={route('admin.return-books.index')}>
             <IconArrowLeft className="size-4" />
-            Kembali
+            Back
           </Link>
         </Button>
       </div>
@@ -207,6 +207,14 @@ export default function Create(props) {
               {errors.notes && (
                 <InputError message={errors.notes} />
               )}
+            </div>
+            <div className="flex justify-end gap-x-2">
+              <Button type="button" variant="ghost" size="lg" onClick={onHandleReset}>
+                Reset
+              </Button>
+              <Button type="submit" variant="orange" size="lg" disabled={processing}>
+                Kembalikan
+              </Button>
             </div>
           </form>
         </CardContent>
