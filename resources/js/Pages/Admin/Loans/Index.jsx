@@ -11,7 +11,7 @@ import { UseFilter } from "@/hooks/UseFilter"
 import AppLayout from "@/Layouts/AppLayout"
 import { flashMessage } from "@/lib/utils"
 import { Link, router } from "@inertiajs/react"
-import { IconArrowUpCircle } from "@tabler/icons-react"
+import { IconArrowDownCircle, IconArrowUpCircle } from "@tabler/icons-react"
 import { IconArrowsDownUp, IconCategory, IconCreditCard, IconPencil, IconPlus, IconRefresh, IconTrash } from "@tabler/icons-react"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -40,7 +40,7 @@ export default function Index(props) {
         <HeaderTitle
           title={props.page_settings.title}
           subtitle={props.page_settings.subtitle}
-          icon={IconCreditCard}
+          icon={IconArrowDownCircle}
         />
         <Button
           variant="orange"
