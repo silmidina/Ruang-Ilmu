@@ -11,6 +11,7 @@ import { UseFilter } from "@/hooks/UseFilter"
 import AppLayout from "@/Layouts/AppLayout"
 import { flashMessage } from "@/lib/utils"
 import { Link, router } from "@inertiajs/react"
+import { IconArrowUpCircle } from "@tabler/icons-react"
 import { IconArrowsDownUp, IconCategory, IconCreditCard, IconPencil, IconPlus, IconRefresh, IconTrash } from "@tabler/icons-react"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -189,6 +190,13 @@ export default function Index(props) {
                   <TableCell>{loan.created_at}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-x-1">
+                      {!loan.has_return_book && (
+                        <Button variant="purple" size="sm" asChild>
+                          <Link href={route('admin.return-books.create', [loan])}>
+                          <IconArrowUpCircle className='size-4'/>
+                          </Link>
+                        </Button>
+                      )}
                       <Button variant="blue" size="sm" asChild> 
                         <Link
                         href={route('admin.loans.edit', loan.id)}

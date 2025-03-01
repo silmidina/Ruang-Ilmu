@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\ReturnBookCondition;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\ReturnBookResource;
+use App\Models\FineSetting;
+use App\Models\Loan;
 use App\Models\ReturnBook;
+use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 
@@ -36,6 +40,32 @@ class ReturnBookController extends Controller
                 'page' => request()->page ?? 1,
                 'search' => request()->search ?? '',
                 'load' => 10
+            ],
+        ]);
+    }
+
+    public function create(Loan $loan): Response|RedirectResponse
+    {
+        if ($loan->returnBook()->exist()) {
+            return to_route('admin.loans.index');
+        }
+
+        if (!FineSetting::first()) {
+            return to_route('admin.fine-settings.create');
+        }
+        return inertia('Admin/ReturnBooks/Create', [
+            'page_settings' => [
+                'title' => 'Pengembalian Buku',
+                'subtitle' => 'Kembalikan buku yang dipinjam disini. Klik kembalikan setelah selesai.',
+                'method' => 'POST',
+                'action' => route('admin.return-books.store', $loan),
+            ],
+            'loan' => $loan->load([
+                'user',
+                'book' => fn($query) => $query->with('publisher'),
+            ]),
+            'date' => [
+                'return_date' => Carbon::now()->toDateString(),
             ],
             'conditions' => ReturnBookCondition::options(),
         ]);
