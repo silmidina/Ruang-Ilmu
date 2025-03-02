@@ -1,5 +1,6 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar';
+import Banner from '@/Components/ui/Banner';
 import { Button } from '@/Components/ui/button';
 import {
     DropdownMenu,
@@ -16,7 +17,6 @@ import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { IconLayoutSidebar } from '@tabler/icons-react';
 import Sidebar from './Partials/Sidebar';
 import SidebarResponsive from './Partials/SidebarResponsive';
-import Banner from '@/Components/ui/Banner';
 
 export default function AppLayout({ title, children }) {
     const auth = usePage().props.auth.user;
@@ -98,7 +98,7 @@ export default function AppLayout({ title, children }) {
                             <div className="gap-4 p-4 lg:gap-6">
                                 {children}
                                 {announcement && announcement.is_active == 1 && (
-                                <Banner message={announcement.message} url={announcement.url} />
+                                    <Banner message={announcement.message} url={announcement.url} />
                                 )}
                             </div>
                         </div>

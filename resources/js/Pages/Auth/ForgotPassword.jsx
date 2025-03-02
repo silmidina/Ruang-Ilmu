@@ -77,8 +77,6 @@ export default function ForgotPassword({ status }) {
                                     </div>
                                 </div>
                             </form>
-                            
-                       
                         </div>
                     </div>
                 </div>
