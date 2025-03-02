@@ -18,8 +18,6 @@ import { toast } from "sonner"
 export default function Index(props) {
   const { data: announcements, meta } = props.announcements;
 
-  
-
   return (
     <div className="flex flex-col w-full pb-32">
       <div className="flex flex-col items-start justify-between mb-8 gap-y-4 lg:flex-row lg:items-center">
@@ -61,7 +59,7 @@ export default function Index(props) {
                   <TableCell>{index + 1 + (meta.current_page - 1) * meta.per_page}</TableCell>
                   <TableCell>{announcement.message}</TableCell>
                   <TableCell>{announcement.url}</TableCell>
-                  <TableCell>{announcement.isActive}</TableCell>
+                  <TableCell>{announcement.is_active}</TableCell>
                   <TableCell>{announcement.created_at}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-x-1">
