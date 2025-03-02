@@ -1,3 +1,5 @@
+import { Link } from "@inertiajs/react";
+
 export default function Banner({ message, url = '#' }) {
   return (
     <div className="fixed inset-x-0 bottom-0 pointer-events-none sm:flex sm:justify-center sm:px-6 lg:pb-5 lg:px-8">
