@@ -106,7 +106,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                             leave="transition ease-in-out"
                             leaveTo="opacity-0"
                         >
-                            <p className="text-sm text-muted-foreground">Saved.</p>
+                            <p className="text-sm text-green-600">Berhasil diupdate!</p>
                         </Transition>
                     </div>
                 </form>
