@@ -3,7 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Alert, AlertDescription } from '@/Components/ui/alert';
-import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
 import { Transition } from '@headlessui/react';
@@ -27,9 +27,9 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     return (
         <Card className={className}>
             <CardHeader>
-                <CardTitle className="text-lg font-medium text-gray-900">Profile Information</CardTitle>
+                <CardTitle >Profile Information</CardTitle>
 
-                <CardDescription className="mt-1 text-sm text-gray-600">
+                <CardDescription>
                     Update your account's profile information and email address.
                 </CardDescription>
             </CardHeader>
