@@ -88,16 +88,15 @@ export default function Index(props) {
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction onClick={() => 
-              console.log('hapus pengumuman')
-                // router.delete(
-                //   route('admin.announcements.destroy', [announcement]), {
-                //     preserveScroll: true,
-                //     preserveState: true,
-                //     onSuccess: (success) => {
-                //       const flash = flashMessage(success);
-                //       if (flash) toast[flash.type](flash.message);
-                //     },
-                //   })
+                 router.delete(
+                   route('admin.announcements.destroy', [announcement]), {
+                     preserveScroll: true,
+                     preserveState: true,
+                     onSuccess: (success) => {
+                       const flash = flashMessage(success);
+                       if (flash) toast[flash.type](flash.message);
+                     },
+                   })
               }>
                 Continue
               </AlertDialogAction>
