@@ -11,7 +11,7 @@ import { UseFilter } from "@/hooks/UseFilter"
 import AppLayout from "@/Layouts/AppLayout"
 import { flashMessage, formatToRupiah } from "@/lib/utils"
 import { Link, router } from "@inertiajs/react"
-import { IconArrowUpCircle } from "@tabler/icons-react"
+import { IconArrowUpCircle, IconEye } from "@tabler/icons-react"
 import { IconArrowsDownUp, IconCategory, IconPencil, IconPlus, IconRefresh, IconTrash } from "@tabler/icons-react"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -222,7 +222,15 @@ export default function Index(props) {
                   <TableCell>{return_book.return_book_check}</TableCell>
                   <TableCell>{return_book.created_at}</TableCell>
                   <TableCell>
-                    -
+                    <div className="flex items-center gap-x-1">
+                      {return_book.fine && (
+                        <Button variant="blue" size="sm" asChild>
+                          <Link href={route('admin.fines.create', [return_book])}>
+                            <IconEye className="size-4"/>
+                          </Link>
+                        </Button>
+                      )}
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
