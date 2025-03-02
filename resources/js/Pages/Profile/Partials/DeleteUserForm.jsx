@@ -1,11 +1,7 @@
-import DangerButton from '@/Components/DangerButton';
 import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
 import Modal from '@/Components/Modal';
-import SecondaryButton from '@/Components/SecondaryButton';
-import TextInput from '@/Components/TextInput';
 import { Button } from '@/Components/ui/button';
-import { CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
 import { useForm } from '@inertiajs/react';
@@ -61,7 +57,9 @@ export default function DeleteUserForm({ className = '' }) {
             </CardHeader>
 
             <CardContent>
-                <Button variant="red" onClick={confirmUserDeletion}>Hapus Akun</Button>
+                <Button variant="red" onClick={confirmUserDeletion}>
+                    Hapus Akun
+                </Button>
 
                 <Modal show={confirmingUserDeletion} onClose={closeModal}>
                     <form onSubmit={deleteUser} className="p-6">
@@ -70,11 +68,14 @@ export default function DeleteUserForm({ className = '' }) {
                         </h2>
 
                         <p className="mt-1 text-sm text-muted-foreground">
-                            Setelah akun anda dihapus, semua resource dan datanya akan dihapus secara permanen. Sebelum menghapus akun anda, harap untuk unduh data atau informasi apapun yang ingin anda simpan.
+                            Setelah akun anda dihapus, semua resource dan datanya akan dihapus secara permanen. Sebelum
+                            menghapus akun anda, harap untuk unduh data atau informasi apapun yang ingin anda simpan.
                         </p>
 
                         <div className="mt-6">
-                            <Label htmlFor="password" value="Password">Password</Label>
+                            <Label htmlFor="password" value="Password">
+                                Password
+                            </Label>
                             <Input
                                 id="password"
                                 type="password"
@@ -85,13 +86,13 @@ export default function DeleteUserForm({ className = '' }) {
                                 className="mt-1 block w-3/4"
                                 placeholder="Password"
                             />
-                            {errors.password && (
-                                <InputError message={errors.password} className="mt-2" />
-                            )}
+                            {errors.password && <InputError message={errors.password} className="mt-2" />}
                         </div>
 
                         <div className="mt-6 flex justify-end">
-                            <Button variant="ghost" size="lg" onClick={closeModal}>Batal</Button>
+                            <Button variant="ghost" size="lg" onClick={closeModal}>
+                                Batal
+                            </Button>
 
                             <Button variant="red" size="lg" className="ms-3" disabled={processing}>
                                 Delete Account
