@@ -64,4 +64,38 @@ class AnnouncementController extends Controller
             return to_route('admin.announcements.index');
         }
     }
+
+    public function edit(Announcement $announcement): Response
+    {
+        return inertia('Admin/Announcements/Edit', [
+            'page_settings' => [
+                'title' => 'Edit Pengumuman',
+                'subtitle' => 'Edit pengumuman di sini. Klik simpan setelah selesai.',
+                'method' => 'PUT',
+                'action' => route('admin.announcements.update', $announcement),
+            ],
+            'announcement' => $announcement,
+        ]);
+    }
+
+    public function update(Announcement $announcement, AnnouncementRequest $request): RedirectResponse
+    {
+        try {
+            if ($request->is_active) {
+                Announcement::where('is_active', true)
+                    ->where('id', '!=', $announcement->id)
+                    ->update(['is_active' => false]);
+            }
+            $announcement->update([
+                'message' => $request->message,
+                'url' => $request->url,
+                'is_active' => $request->is_active,
+            ]);
+            flashMessage(MessageType::UPDATED->message('Pengumuman'));
+            return to_route('admin.announcements.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.announcements.index');
+        }
+    }
 }
