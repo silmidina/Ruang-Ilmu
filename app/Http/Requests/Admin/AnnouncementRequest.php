@@ -39,7 +39,6 @@ class AnnouncementRequest extends FormRequest
             ],
         ];
     }
-
     public function attributes(): array
     {
         return [

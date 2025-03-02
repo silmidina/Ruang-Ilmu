@@ -56,7 +56,7 @@ export default function Sidebar({ url, auth }) {
             <NavLink url={route('admin.return-books.index')} active={url.startsWith('/admin/return-books')} title="Pengembalian" icon={IconArrowUpCircle} />
 
             <div className="px-3 py-2 text-sm font-semibold text-foreground">Lainnya</div>
-            <NavLink url="#" title="Pengumuman" icon={IconAlertCircle} />
+            <NavLink url={route('admin.announcements.index')} active={url.startsWith('/admin/announcements')} title="Pengumuman" icon={IconAlertCircle} />
             <NavLink url={route('profile.edit')} title="Profile" icon={IconUser} />
             <NavLink
                 url={route('logout')}
