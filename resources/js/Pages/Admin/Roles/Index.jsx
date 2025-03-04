@@ -177,18 +177,17 @@ export default function Index(props) {
                                                         <AlertDialogCancel>Cancel</AlertDialogCancel>
                                                         <AlertDialogAction
                                                             onClick={() =>
-                                                                console.log('hapus peran')
-                                                                // router.delete(
-                                                                //     route('admin.roles.destroy', [role]),
-                                                                //     {
-                                                                //         preserveScroll: true,
-                                                                //         preserveState: true,
-                                                                //         onSuccess: (success) => {
-                                                                //             const flash = flashMessage(success);
-                                                                //             if (flash) toast[flash.type](flash.message);
-                                                                //         },
-                                                                //     },
-                                                                // )
+                                                                 router.delete(
+                                                                     route('admin.roles.destroy', [role]),
+                                                                     {
+                                                                         preserveScroll: true,
+                                                                         preserveState: true,
+                                                                         onSuccess: (success) => {
+                                                                             const flash = flashMessage(success);
+                                                                             if (flash) toast[flash.type](flash.message);
+                                                                         },
+                                                                     },
+                                                                 )
                                                             }
                                                         >
                                                             Continue
