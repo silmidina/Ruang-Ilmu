@@ -72,4 +72,32 @@ class PermissionController extends Controller
             return to_route('admin.permissions.index');
         }
     }
+
+    public function edit(Permission $permission): Response
+    {
+        return inertia('Admin/Permissions/Edit', [
+            'page_settings' => [
+                'title' => 'Edit Izin',
+                'subtitle' => 'Edit data izin baru di sini. Klik simpan setelah selesai.',
+                'method' => 'PUT',
+                'action' => route('admin.permissions.update', $permission),
+            ],
+            'permission' => $permission,
+        ]);
+    }
+
+    public function update(Permission $permission, PermissionRequest $request): RedirectResponse
+    {
+        try {
+            $permission->update([
+                'name' => $request->name,
+                'guard_name' => $request->guard_name ?? 'web',
+            ]);
+            flashMessage(MessageType::UPDATED->message('Izin'));
+            return to_route('admin.permissions.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()));
+            return to_route('admin.permissions.index');
+        }
+    }
 }
