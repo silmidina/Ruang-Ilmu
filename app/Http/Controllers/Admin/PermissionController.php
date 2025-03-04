@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\MessageType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PermissionRequest;
 use App\Http\Resources\Admin\PermissionResource;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Spatie\Permission\Models\Permission;
+use Throwable;
 
 class PermissionController extends Controller
 {
@@ -40,5 +44,32 @@ class PermissionController extends Controller
                 'load' => 10,
             ],
         ]);
+    }
+
+    public function create(): Response
+    {
+        return inertia('Admin/Permissions/Create', [
+            'page_settings' => [
+                'title' => 'Tambah Izin',
+                'subtitle' => 'Tambahkan data izin baru di sini. Klik simpan setelah selesai.',
+                'method' => 'POST',
+                'action' => route('admin.permissions.store'),
+            ],
+        ]);
+    }
+
+    public function store(PermissionRequest $request): RedirectResponse
+    {
+        try {
+            Permission::create([
+                'name' => $request->name,
+                'guard_name' => $request->guard_name ?? 'web',
+            ]);
+            flashMessage(MessageType::CREATED->message('Izin'));
+            return to_route('admin.permissions.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()));
+            return to_route('admin.permissions.index');
+        }
     }
 }
