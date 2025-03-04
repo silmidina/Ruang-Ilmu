@@ -72,4 +72,32 @@ class RoleController extends Controller
             return to_route('admin.roles.index');
         }
     }
+
+    public function edit(Role $role): Response
+    {
+        return inertia('Admin/Roles/Edit', [
+            'page_settings' => [
+                'title' => 'Edit Role',
+                'subtitle' => 'Edit data peran baru di sini. Klik simpan setelah selesai.',
+                'method' => 'PUT',
+                'action' => route('admin.roles.update', $role),
+            ],
+            'role' => $role
+        ]);
+    }
+
+    public function update(Role $role, RoleRequest $request): RedirectResponse
+    {
+        try {
+            $role->update([
+                'name' => $request->name,
+                'guard_name' => $request->guard_name,
+            ]);
+            flashMessage(MessageType::UPDATED->message('Peran'));
+            return to_route('admin.roles.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.roles.index');
+        }
+    }
 }
