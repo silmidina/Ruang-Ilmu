@@ -100,4 +100,16 @@ class PermissionController extends Controller
             return to_route('admin.permissions.index');
         }
     }
+
+    public function destroy(Permission $permission): RedirectResponse
+    {
+        try {
+            $permission->delete();
+            flashMessage(MessageType::DELETED->message('Izin'));
+            return to_route('admin.permissions.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()));
+            return to_route('admin.permissions.index');
+        }
+    }
 }
