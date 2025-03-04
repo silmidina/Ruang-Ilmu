@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\MessageType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AssignUserRequest;
 use App\Http\Resources\Admin\AssignUserResource;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Spatie\Permission\Models\Role;
+use Throwable;
 
 class AssignUserController extends Controller
 {
@@ -38,5 +43,35 @@ class AssignUserController extends Controller
                 'load' => 10,
             ],
         ]);
+    }
+
+    public function edit(User $user): Response
+    {
+        return inertia('Admin/AssignUsers/Edit', [
+            'page_settings' => [
+                'title' => 'Sinkronisasi Peran',
+                'subtitle' => 'Sinkronisasi peran di sini. Klik simpan setelah selesai.',
+                'method' => 'PUT',
+                'action' => route('admin.assign-users.update', $user),
+            ],
+            'user' => $user->load('roles'),
+            'roles' => Role::query()->select(['id', 'name'])->where('guard_name', 'web')->get()->map(fn($item) => [
+                'value' => $item->id,
+                'label' => $item->name,
+            ]),
+        ]);
+    }
+
+    public function update(User $user, AssignUserRequest $request): RedirectResponse
+    {
+        try {
+            $user->syncRoles($request->roles);
+            // flashMessage(MessageType::UPDATED->message('Tetapkan Izin'));
+            flashMessage("Berhasil menyinkronkan peran ke pengguna {$user->name}");
+            return to_route('admin.assign-users.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.assign-users.index');
+        }
     }
 }
