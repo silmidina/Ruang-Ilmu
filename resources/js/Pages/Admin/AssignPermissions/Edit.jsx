@@ -1,30 +1,36 @@
 import HeaderTitle from '@/Components/HeaderTitle';
 import InputError from '@/Components/InputError';
+import { MultiSelect } from '@/Components/MultiSelect';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/Components/ui/select';
 import { Textarea } from '@/Components/ui/textarea';
 import AppLayout from '@/Layouts/AppLayout';
 import { flashMessage } from '@/lib/utils';
 import { Link, useForm } from '@inertiajs/react';
-import { IconArrowLeft, IconBuildingCommunity } from '@tabler/icons-react';
-import { useRef } from 'react';
+import { IconArrowLeft, IconCategory, IconCircleKey, IconKeyframe } from '@tabler/icons-react';
+import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 export default function Edit(props) {
-    const fileInputLogo = useRef(null);
+  const [selectedPermissions, setSelectedPermissions] = useState(
+    Array.from(new Set(props.role.permissions.map((permission) => permission.id)))
+  )
 
     const { data, setData, reset, post, processing, errors } = useForm({
-        name: props.publisher.name ?? '',
-        address: props.publisher.address ?? '',
-        email: props.publisher.email ?? '',
-        phone: props.publisher.phone ?? '',
-        logo: null,
+        name: props.role.name ?? '',
+        permissions: selectedPermissions,
         _method: props.page_settings.method,
     });
 
-    const onHandleChange = (e) => setData(e.target.name, e.target.value);
+  const onHandleChange = (e) => setData(e.target.name, e.target.value);
+  
+  const handlePermissionChange = (selected) => {
+    setSelectedPermissions(selected);
+    setData('permissions', selected);
+  }
 
     const onHandleSubmit = (e) => {
         e.preventDefault();
@@ -40,7 +46,6 @@ export default function Edit(props) {
 
     const onHandleReset = () => {
         reset();
-        fileInputCover.current.value = null;
     };
 
     return (
@@ -49,10 +54,10 @@ export default function Edit(props) {
                 <HeaderTitle
                     title={props.page_settings.title}
                     subtitle={props.page_settings.subtitle}
-                    icon={IconBuildingCommunity}
+                    icon={IconKeyframe}
                 />
                 <Button variant="orange" size="lg" asChild>
-                    <Link href={route('admin.publishers.index')}>
+                    <Link href={route('admin.assign-permissions.index')}>
                         <IconArrowLeft className="size-4" />
                         Back
                     </Link>
@@ -62,7 +67,7 @@ export default function Edit(props) {
                 <CardContent className="p-6">
                     <form className="space-y-6" onSubmit={onHandleSubmit}>
                         <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="name">Nama</Label>
+                            <Label htmlFor="name">Peran</Label>
                             <Input
                                 name="name"
                                 id="name"
@@ -70,58 +75,27 @@ export default function Edit(props) {
                                 placeholder="Masukkan nama..."
                                 value={data.name}
                                 onChange={onHandleChange}
+                                disabled
                             />
                             {errors.name && <InputError message={errors.name} />}
                         </div>
                         <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="address">Alamat</Label>
-                            <Textarea
-                                name="address"
-                                id="address"
-                                placeholder="Masukkan alamat..."
-                                value={data.address}
-                                onChange={onHandleChange}
-                            ></Textarea>
-                            {errors.address && <InputError message={errors.address} />}
-                        </div>
-                        <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="email">Email</Label>
-                            <Input
-                                name="email"
-                                id="email"
-                                placeholder="Masukkan email..."
-                                value={data.email}
-                                onChange={onHandleChange}
+                            <Label htmlFor="permissions">Izin</Label>
+                            <MultiSelect 
+                              options={props.permissions}
+                              onValueChange={handlePermissionChange}
+                              defaultValue={selectedPermissions}
+                              placeholder="Pilih Izin"
+                              variant='inverted'
                             />
-                            {errors.email && <InputError message={errors.email} />}
+                            {errors.permissions && <InputError message={errors.permissions} />}
                         </div>
-                        <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="phone">Nomor Handphone</Label>
-                            <Input
-                                name="phone"
-                                id="phone"
-                                placeholder="Masukkan nomor handphone..."
-                                value={data.phone}
-                                onChange={onHandleChange}
-                            />
-                            {errors.phone && <InputError message={errors.phone} />}
-                        </div>
-                        <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="logo">Logo</Label>
-                            <Input
-                                name="logo"
-                                id="logo"
-                                type="file"
-                                onChange={(e) => setData(e.target.name, e.target.files[0])}
-                                ref={fileInputLogo}
-                            />
-                            {errors.logo && <InputError message={errors.logo} />}
-                        </div>
+                        
                         <div className="flex justify-end gap-x-2">
                             <Button type="button" variant="ghost" size="lg" onClick={onHandleReset}>
                                 Reset
                             </Button>
-                            <Button type="submit" variant="orange" size="lg">
+                            <Button type="submit" variant="orange" size="lg" disabled={processing}>
                                 Save
                             </Button>
                         </div>

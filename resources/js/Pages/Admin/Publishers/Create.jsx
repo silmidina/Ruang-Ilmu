@@ -61,7 +61,7 @@ export default function Create(props) {
             <Card>
                 <CardContent className="p-6">
                     <form className="space-y-6" onSubmit={onHandleSubmit}>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="name">Nama</Label>
                             <Input
                                 name="name"
@@ -73,7 +73,7 @@ export default function Create(props) {
                             />
                             {errors.name && <InputError message={errors.name} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="address">Alamat</Label>
                             <Textarea
                                 name="address"
@@ -84,7 +84,7 @@ export default function Create(props) {
                             ></Textarea>
                             {errors.address && <InputError message={errors.address} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="email">Email</Label>
                             <Input
                                 name="email"
@@ -96,7 +96,7 @@ export default function Create(props) {
                             />
                             {errors.email && <InputError message={errors.email} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="phone">Nomor Handphone</Label>
                             <Input
                                 name="phone"
@@ -108,7 +108,7 @@ export default function Create(props) {
                             />
                             {errors.phone && <InputError message={errors.phone} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="logo">Logo</Label>
                             <Input
                                 name="logo"

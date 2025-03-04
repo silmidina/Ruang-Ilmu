@@ -53,7 +53,7 @@ export default function Create(props) {
             <Card>
                 <CardContent className="p-6">
                     <form className="space-y-6" onSubmit={onHandleSubmit}>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="user">Nama</Label>
                             <ComboBox
                                 items={props.page_data.users}
@@ -62,7 +62,7 @@ export default function Create(props) {
                             />
                             {errors.user && <InputError message={errors.user} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="book">Buku</Label>
                             <ComboBox
                                 items={props.page_data.books}

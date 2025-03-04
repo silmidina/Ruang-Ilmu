@@ -52,7 +52,7 @@ export default function Create(props) {
             <Card>
                 <CardContent className="p-6">
                     <form className="space-y-6" onSubmit={onHandleSubmit}>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="late_fee_per_day">Denda Keterlambatan</Label>
                             <Input
                                 name="late_fee_per_day"
@@ -63,7 +63,7 @@ export default function Create(props) {
                             />
                             {errors.late_fee_per_day && <InputError message={errors.late_fee_per_day} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="damage_fee_percentage">Denda Rusak (%)</Label>
                             <Input
                                 name="damage_fee_percentage"
@@ -75,7 +75,7 @@ export default function Create(props) {
                             />
                             {errors.damage_fee_percentage && <InputError message={errors.damage_fee_percentage} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="lost_fee_percentage">Denda Hilang (%)</Label>
                             <Input
                                 name="lost_fee_percentage"

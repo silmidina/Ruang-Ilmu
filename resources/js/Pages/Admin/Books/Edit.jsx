@@ -68,7 +68,7 @@ export default function Edit(props) {
             <Card>
                 <CardContent className="p-6">
                     <form className="space-y-6" onSubmit={onHandleSubmit}>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="title">Judul</Label>
                             <Input
                                 name="title"
@@ -80,7 +80,7 @@ export default function Edit(props) {
                             />
                             {errors.title && <InputError message={errors.title} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="author">Penulis</Label>
                             <Input
                                 name="author"
@@ -92,7 +92,7 @@ export default function Edit(props) {
                             />
                             {errors.author && <InputError message={errors.author} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="publication_year">Tahun Terbit</Label>
                             <Select
                                 defaultValue={data.publication_year}
@@ -115,7 +115,7 @@ export default function Edit(props) {
                             </Select>
                             {errors.publication_year && <InputError message={errors.publication_year} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="isbn">ISBN (International Standard Book Number)</Label>
                             <Input
                                 name="isbn"
@@ -127,7 +127,7 @@ export default function Edit(props) {
                             />
                             {errors.isbn && <InputError message={errors.isbn} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="language">Bahasa</Label>
                             <Select defaultValue={data.language} onValueChange={(value) => setData('language', value)}>
                                 <SelectTrigger>
@@ -146,7 +146,7 @@ export default function Edit(props) {
                             </Select>
                             {errors.language && <InputError message={errors.language} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="synopsis">Sinopsis</Label>
                             <Textarea
                                 name="synopsis"
@@ -157,7 +157,7 @@ export default function Edit(props) {
                             ></Textarea>
                             {errors.synopsis && <InputError message={errors.synopsis} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="number_of_pages">Jumlah Halaman</Label>
                             <Input
                                 name="number_of_pages"
@@ -169,7 +169,7 @@ export default function Edit(props) {
                             />
                             {errors.number_of_pages && <InputError message={errors.number_of_pages} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="price">Harga</Label>
                             <Input
                                 name="price"
@@ -182,7 +182,7 @@ export default function Edit(props) {
                             {errors.price && <InputError message={errors.price} />}
                         </div>
 
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="category_id">Kategori</Label>
                             <Select
                                 defaultValue={data.category_id}
@@ -205,7 +205,7 @@ export default function Edit(props) {
                             </Select>
                             {errors.category_id && <InputError message={errors.category_id} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="publisher_id">Penerbit</Label>
                             <Select
                                 defaultValue={data.publisher_id}
@@ -228,7 +228,7 @@ export default function Edit(props) {
                             </Select>
                             {errors.publisher_id && <InputError message={errors.publisher_id} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="cover">Cover</Label>
                             <Input
                                 name="cover"

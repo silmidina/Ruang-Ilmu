@@ -59,7 +59,7 @@ export default function Create(props) {
             <Card>
                 <CardContent className="p-6">
                     <form className="space-y-6" onSubmit={onHandleSubmit}>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="name">Nama</Label>
                             <Input
                                 name="name"
@@ -71,7 +71,7 @@ export default function Create(props) {
                             />
                             {errors.name && <InputError message={errors.name} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="description">Deskripsi</Label>
                             <Textarea
                                 name="description"
@@ -82,7 +82,7 @@ export default function Create(props) {
                             ></Textarea>
                             {errors.description && <InputError message={errors.description} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="cover">Cover</Label>
                             <Input
                                 name="cover"

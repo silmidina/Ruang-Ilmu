@@ -57,7 +57,7 @@ export default function Edit(props) {
             <Card>
                 <CardContent className="p-6">
                     <form className="space-y-6" onSubmit={onHandleSubmit}>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="name">Nama</Label>
                             <Input
                                 name="name"
@@ -69,7 +69,7 @@ export default function Edit(props) {
                             />
                             {errors.name && <InputError message={errors.name} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="guard_name">Guard</Label>
                             <Select
                                 defaultValue={data.guard_name}

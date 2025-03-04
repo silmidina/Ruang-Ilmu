@@ -55,7 +55,7 @@ export default function Edit(props) {
             <Card>
                 <CardContent className="p-6">
                     <form className="space-y-6" onSubmit={onHandleSubmit}>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="message">Pesan</Label>
                             <Input
                                 name="message"
@@ -67,7 +67,7 @@ export default function Edit(props) {
                             />
                             {errors.message && <InputError message={errors.message} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="url">URL</Label>
                             <Input
                                 name="url"
@@ -79,7 +79,7 @@ export default function Edit(props) {
                             />
                             {errors.url && <InputError message={errors.url} />}
                         </div>
-                        <div className="5 grid w-full items-center gap-1">
+                        <div className="grid w-full items-center gap-1.5">
                             <div className="items-top flex space-x-2">
                                 <Checkbox
                                     id="is_active"
