@@ -166,7 +166,7 @@ export default function Index(props) {
                                     <TableCell>
                                         <div className="flex items-center gap-x-1">
                                             <Button variant="blue" size="sm" asChild>
-                                                <Link href={route('admin.route_accesses.edit', route_access.id)}>
+                                                <Link href={route('admin.route-accesses.edit', route_access.id)}>
                                                     <IconPencil className="size-4" />
                                                 </Link>
                                             </Button>
