@@ -28,10 +28,10 @@ class RouteAccess extends Model
 
     public function scopeFilter(Builder $query, array $filters): void
     {
-        $query->when($filters['search'], function ($query, $search) {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where('route_name', 'REGEXP', $search)
                 ->orWhereHas('role', fn($query) => $query->where('name', 'REGEXP', $search))
-                ->orWhereHas('permission', fn($query) => $query->where('name', 'REGEXP', $search));
+                ->orWhaereHas('permission', fn($query) => $query->where('name', 'REGEXP', $search));
         });
     }
 
