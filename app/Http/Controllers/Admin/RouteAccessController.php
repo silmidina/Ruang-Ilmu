@@ -135,4 +135,16 @@ class RouteAccessController extends Controller
             return to_route('admin.route-accesses.index');
         }
     }
+
+    public function destroy(RouteAccess $routeAccess): RedirectResponse
+    {
+        try {
+            $routeAccess->delete();
+            flashMessage(MessageType::DELETED->message('Akses Rute'));
+            return to_route('admin.route-accesses.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.route-accesses.index');
+        }
+    }
 }
