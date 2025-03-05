@@ -1,5 +1,7 @@
 import CardStat from '@/Components/CardStat';
 import HeaderTitle from '@/Components/HeaderTitle';
+import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
 import AppLayout from '@/Layouts/AppLayout';
 import { IconCalendar, IconChartDots2 } from '@tabler/icons-react';
 
@@ -59,6 +61,47 @@ export default function Index(props) {
         >
         <div className="text-2xl font-bold">0</div>
         </CardStat>
+      </div>
+
+      <h2 className='font-semibold leading-relaxed text-foreground'>Peminjaman Per Buku</h2>
+      <div className="flex flex-col justify-between w-full gap-8 lg:flex-row">
+        <Card className="w-full lg:w-1/2">
+          <CardHeader>
+            <CardTitle>Buku Paling Banyak Dipinjam</CardTitle>
+          </CardHeader>
+          <CardContent className="px-0 py-0 [&_td]:whitespace-nowrap [&_td]:px-6 [&_th]:px-6">
+            <Table className="w-full">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>#</TableHead>
+                  <TableHead>Buku</TableHead>
+                  <TableHead>Penulis</TableHead>
+                  <TableHead>Jumlah</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody></TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+
+        <Card className="w-full lg:w-1/2">
+          <CardHeader>
+            <CardTitle>Buku Paling Sedekit Dipinjam</CardTitle>
+          </CardHeader>
+          <CardContent className="px-0 py-0 [&_td]:whitespace-nowrap [&_td]:px-6 [&_th]:px-6">
+            <Table className="w-full">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>#</TableHead>
+                  <TableHead>Buku</TableHead>
+                  <TableHead>Penulis</TableHead>
+                  <TableHead>Jumlah</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody></TableBody>
+            </Table>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )
