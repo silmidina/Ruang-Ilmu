@@ -1,7 +1,7 @@
 import CardStat from '@/Components/CardStat';
 import HeaderTitle from '@/Components/HeaderTitle';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
-import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
 import AppLayout from '@/Layouts/AppLayout';
 import { IconCalendar, IconChartDots2 } from '@tabler/icons-react';
 
@@ -26,7 +26,7 @@ export default function Index(props) {
             iconClassName: 'text-white'
           }}
         >
-        <div className="text-2xl font-bold">0</div>
+          <div className="text-2xl font-bold">{props.page_data.total_loans.days}</div>
         </CardStat>
 {/* Mingguan */}
         <CardStat
@@ -37,7 +37,7 @@ export default function Index(props) {
             iconClassName: 'text-white'
           }}
         >
-        <div className="text-2xl font-bold">0</div>
+        <div className="text-2xl font-bold">{props.page_data.total_loans.weeks}</div>
         </CardStat>
 {/* Bulanan */}
         <CardStat
@@ -48,7 +48,7 @@ export default function Index(props) {
             iconClassName: 'text-white'
           }}
         >
-        <div className="text-2xl font-bold">0</div>
+        <div className="text-2xl font-bold">{props.page_data.total_loans.months}</div>
         </CardStat>
 {/* Tahunan */}
         <CardStat
@@ -59,7 +59,7 @@ export default function Index(props) {
             iconClassName: 'text-white'
           }}
         >
-        <div className="text-2xl font-bold">0</div>
+        <div className="text-2xl font-bold">{props.page_data.total_loans.years}</div>
         </CardStat>
       </div>
 
@@ -79,14 +79,23 @@ export default function Index(props) {
                   <TableHead>Jumlah</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody></TableBody>
+              <TableBody>
+                {props.page_data.most_loan_books.map((most_loan_book, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{most_loan_book.title}</TableCell>
+                    <TableCell>{most_loan_book.author}</TableCell>
+                    <TableCell>{most_loan_book.loans_count}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           </CardContent>
         </Card>
 
         <Card className="w-full lg:w-1/2">
           <CardHeader>
-            <CardTitle>Buku Paling Sedekit Dipinjam</CardTitle>
+            <CardTitle>Buku Paling Sedikit Dipinjam</CardTitle>
           </CardHeader>
           <CardContent className="px-0 py-0 [&_td]:whitespace-nowrap [&_td]:px-6 [&_th]:px-6">
             <Table className="w-full">
@@ -98,7 +107,16 @@ export default function Index(props) {
                   <TableHead>Jumlah</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody></TableBody>
+              <TableBody>
+                {props.page_data.least_loan_books.map((least_loan_books, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{least_loan_books.title}</TableCell>
+                    <TableCell>{least_loan_books.author}</TableCell>
+                    <TableCell>{least_loan_books.loans_count}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           </CardContent>
         </Card>
