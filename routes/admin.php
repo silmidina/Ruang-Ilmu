@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AssignPermissionController;
 use App\Http\Controllers\Admin\AssignUserController;
 use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\BookStockReportController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FineController;
 use App\Http\Controllers\Admin\FineReportController;
@@ -68,6 +69,12 @@ Route::middleware('auth')->prefix('admin')->group(function () {
   Route::controller(FineSettingController::class)->group(function () {
     Route::get('fine-settings/create', 'create')->name('admin.fine-settings.create');
     Route::put('fine-settings/create', 'store')->name('admin.fine-settings.store');
+  });
+
+  Route::controller(BookStockReportController::class)->group(function () {
+    Route::get('book-stock-reports', 'index')->name('admin.book-stock-reports.index');
+    Route::get('book-stock-reports/edit/{stock}', 'edit')->name('admin.book-stock-reports.edit');
+    Route::put('book-stock-reports/edit/{stock}', 'update')->name('admin.book-stock-reports.update');
   });
 
   Route::controller(LoanController::class)->group(function () {
