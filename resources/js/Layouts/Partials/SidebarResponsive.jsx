@@ -153,6 +153,7 @@ export default function SidebarResponsive({ url, auth }) {
                     </>
                 )}
 
+                {/* sidebar member */}
                 {auth.role.some((role) => ['member'].includes(role)) && (
                     <>
                         <NavLinkResponsive url="#" active={url.startsWith('/books')} title="Buku" icon={IconBooks} />
