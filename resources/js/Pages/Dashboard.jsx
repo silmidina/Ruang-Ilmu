@@ -2,8 +2,9 @@ import CardStat from '@/Components/CardStat';
 import HeaderTitle from '@/Components/HeaderTitle';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
-import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
 import AppLayout from '@/Layouts/AppLayout';
+import { formatToRupiah } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
 import { IconArrowDownCircle, IconArrowUpCircle, IconArrowUpRight, IconBook, IconBooks, IconDashboard, IconMoneybag, IconUsersGroup } from '@tabler/icons-react';
 
@@ -30,7 +31,7 @@ export default function Dashboard(props) {
                         iconClassName:  'text-white',
                     }}
                 >
-                    <div className="text-2xl font-bold">0</div>
+                    <div className="text-2xl font-bold">{props.page_data.total_books}</div>
                 </CardStat>
                 <CardStat
                     data={{ 
@@ -40,7 +41,7 @@ export default function Dashboard(props) {
                         iconClassName:  'text-white',
                     }}
                 >
-                    <div className="text-2xl font-bold">0</div>
+                    <div className="text-2xl font-bold">{props.page_data.total_users}</div>
                 </CardStat>
                 <CardStat
                     data={{ 
@@ -50,7 +51,7 @@ export default function Dashboard(props) {
                         iconClassName:  'text-white',
                     }}
                 >
-                    <div className="text-2xl font-bold">0</div>
+                    <div className="text-2xl font-bold">{props.page_data.total_loans}</div>
                 </CardStat>
                 <CardStat
                     data={{ 
@@ -60,7 +61,7 @@ export default function Dashboard(props) {
                         iconClassName:  'text-white',
                     }}
                 >
-                    <div className="text-2xl font-bold">0</div>
+                    <div className="text-2xl font-bold">{props.page_data.total_returns}</div>
                 </CardStat>
             </div>
             )}
@@ -76,7 +77,7 @@ export default function Dashboard(props) {
                         iconClassName:  'text-white',
                     }}
                 >
-                    <div className="text-2xl font-bold">0</div>
+                    <div className="text-2xl font-bold">{props.page_data.total_loans}</div>
                 </CardStat>
                 <CardStat
                     data={{ 
@@ -86,7 +87,7 @@ export default function Dashboard(props) {
                         iconClassName:  'text-white',
                     }}
                 >
-                    <div className="text-2xl font-bold">0</div>
+                    <div className="text-2xl font-bold">{props.page_data.total_returns}</div>
                 </CardStat>
                 <CardStat
                     data={{ 
@@ -96,7 +97,7 @@ export default function Dashboard(props) {
                         iconClassName:  'text-white',
                     }}
                 >
-                    <div className="text-2xl font-bold">0</div>
+                    <div className="text-2xl font-bold">{formatToRupiah(props.page_data.total_fines)}</div>
                 </CardStat>
             </div>
             )}
@@ -134,7 +135,14 @@ export default function Dashboard(props) {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-
+                                {props.page_data.loans.map((loan, index) => (
+                                <TableRow key={index}>
+                                    <TableCell>{index + 1}</TableCell>
+                                    <TableCell>{loan.loan_code}</TableCell>
+                                    <TableCell>{loan.book.title}</TableCell>
+                                    <TableCell>{loan.user.name}</TableCell>
+                                </TableRow>
+                                ))}
                             </TableBody>
                         </Table>
                 </CardContent>
@@ -173,7 +181,14 @@ export default function Dashboard(props) {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                
+                                {props.page_data.return_books.map((return_book, index) => (
+                                <TableRow key={index}>
+                                    <TableCell>{index + 1}</TableCell>
+                                    <TableCell>{return_book.return_book_code}</TableCell>
+                                    <TableCell>{return_book.book.title}</TableCell>
+                                    <TableCell>{return_book.user.name}</TableCell>
+                                </TableRow>
+                                ))}
                             </TableBody>
                         </Table>
                 </CardContent>
