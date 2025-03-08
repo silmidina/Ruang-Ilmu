@@ -5,16 +5,13 @@ import { Card, CardContent } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/Components/ui/select';
-import { Textarea } from '@/Components/ui/textarea';
 import AppLayout from '@/Layouts/AppLayout';
 import { flashMessage } from '@/lib/utils';
 import { Link, useForm } from '@inertiajs/react';
-import { IconArrowLeft, IconCategory, IconCircleKey, IconVersions } from '@tabler/icons-react';
-import { useRef } from 'react';
+import { IconArrowLeft, IconVersions } from '@tabler/icons-react';
 import { toast } from 'sonner';
 
 export default function Edit(props) {
-
     const { data, setData, reset, post, processing, errors } = useForm({
         name: props.permission.name ?? '',
         guard_name: props.permission.guard_name ?? 'web',
@@ -75,10 +72,10 @@ export default function Edit(props) {
                                 defaultValue={data.guard_name}
                                 onValueChange={(value) => setData('guard_name', value)}
                             >
-                            <SelectTrigger>
-                                <SelectValue>
-                                    {['web', 'api'].find((guard)=> guard === data.guard_name) ?? 'Pilih Guard'}
-                                </SelectValue>
+                                <SelectTrigger>
+                                    <SelectValue>
+                                        {['web', 'api'].find((guard) => guard === data.guard_name) ?? 'Pilih Guard'}
+                                    </SelectValue>
                                 </SelectTrigger>
                                 <SelectContent>
                                     {['web', 'api'].map((guard, index) => (
@@ -90,7 +87,7 @@ export default function Edit(props) {
                             </Select>
                             {errors.guard_name && <InputError message={errors.guard_name} />}
                         </div>
-                        
+
                         <div className="flex justify-end gap-x-2">
                             <Button type="button" variant="ghost" size="lg" onClick={onHandleReset}>
                                 Reset

@@ -20,7 +20,7 @@ import SidebarResponsive from './Partials/SidebarResponsive';
 
 export default function AppLayout({ title, children }) {
     const auth = usePage().props.auth.user;
-    console.log(auth);
+    // console.log(auth);
     const { url } = usePage();
     const announcement = usePage().props.announcement;
     return (

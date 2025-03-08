@@ -7,8 +7,7 @@ import { Label } from '@/Components/ui/label';
 import AppLayout from '@/Layouts/AppLayout';
 import { flashMessage } from '@/lib/utils';
 import { Link, useForm } from '@inertiajs/react';
-import { IconRoute } from '@tabler/icons-react';
-import { IconArrowDownCircle, IconArrowLeft } from '@tabler/icons-react';
+import { IconArrowLeft, IconRoute } from '@tabler/icons-react';
 import { toast } from 'sonner';
 
 export default function Edit(props) {
@@ -81,7 +80,7 @@ export default function Edit(props) {
                             />
                             {errors.permission && <InputError message={errors.permission} />}
                         </div>
-                        
+
                         <div className="flex justify-end gap-x-2">
                             <Button type="button" variant="ghost" size="lg" onClick={onHandleReset}>
                                 Reset

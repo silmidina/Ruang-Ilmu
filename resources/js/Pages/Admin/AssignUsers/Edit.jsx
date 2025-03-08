@@ -5,19 +5,15 @@ import { Button } from '@/Components/ui/button';
 import { Card, CardContent } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/Components/ui/select';
-import { Textarea } from '@/Components/ui/textarea';
 import AppLayout from '@/Layouts/AppLayout';
 import { flashMessage } from '@/lib/utils';
 import { Link, useForm } from '@inertiajs/react';
-import { IconArrowLeft, IconCategory, IconCircleKey, IconKeyframe, IconLayoutKanban } from '@tabler/icons-react';
-import { useRef, useState } from 'react';
+import { IconArrowLeft, IconLayoutKanban } from '@tabler/icons-react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 
 export default function Edit(props) {
-  const [selectedRoles, setSelectedRoles] = useState(
-    Array.from(new Set(props.user.roles.map((role) => role.id)))
-  )
+    const [selectedRoles, setSelectedRoles] = useState(Array.from(new Set(props.user.roles.map((role) => role.id))));
 
     const { data, setData, reset, post, processing, errors } = useForm({
         email: props.user.email ?? '',
@@ -25,12 +21,12 @@ export default function Edit(props) {
         _method: props.page_settings.method,
     });
 
-  const onHandleChange = (e) => setData(e.target.name, e.target.value);
-  
-  const handleRoleChange = (selected) => {
-    setSelectedRoles(selected);
-    setData('roles', selected);
-  }
+    const onHandleChange = (e) => setData(e.target.name, e.target.value);
+
+    const handleRoleChange = (selected) => {
+        setSelectedRoles(selected);
+        setData('roles', selected);
+    };
 
     const onHandleSubmit = (e) => {
         e.preventDefault();
@@ -81,16 +77,16 @@ export default function Edit(props) {
                         </div>
                         <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="roles">Peran</Label>
-                            <MultiSelect 
-                              options={props.roles}
-                              onValueChange={handleRoleChange}
-                              defaultValue={selectedRoles}
-                              placeholder="Pilih Peran"
-                              variant='inverted'
+                            <MultiSelect
+                                options={props.roles}
+                                onValueChange={handleRoleChange}
+                                defaultValue={selectedRoles}
+                                placeholder="Pilih Peran"
+                                variant="inverted"
                             />
                             {errors.roles && <InputError message={errors.roles} />}
                         </div>
-                        
+
                         <div className="flex justify-end gap-x-2">
                             <Button type="button" variant="ghost" size="lg" onClick={onHandleReset}>
                                 Reset
