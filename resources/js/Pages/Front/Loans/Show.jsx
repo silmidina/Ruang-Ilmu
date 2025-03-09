@@ -86,7 +86,23 @@ export default function Show(props) {
                   </Link>
                 </Button>
                 {!props.loan.return_book && (
-                  <Button variant="orange" onClick={() => console.log('kembalikan bukunya')}>
+                  <Button variant="orange" onClick={() => 
+                    router.post(
+                      route('front.return-books.store', [
+                        props.loan.book.slug,
+                        props.loan.loan_code,
+                      ]),
+                      {},
+                      {
+                        preserveScroll: true,
+                        preserveState: true,
+                        onSuccess: (success) => {
+                          const flash = flashMessage(success);
+                          if(flash) toast[flash.type](flash.message)
+                        }
+                      }
+                    )
+                  }>
                   Kembalikan
                 </Button>
                 )}

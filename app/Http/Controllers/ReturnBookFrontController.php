@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ReturnBookFrontResource;
+use App\Models\Book;
+use App\Models\Loan;
 use App\Models\ReturnBook;
+use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 
@@ -42,5 +46,18 @@ class ReturnBookFrontController extends Controller
                 'checked' => ReturnBook::query()->member(auth()->user()->id)->checked()->count(),
             ],
         ]);
+    }
+
+    public function store(Book $book, Loan $loan): RedirectResponse
+    {
+        $return_book = $loan->returnBook()->create([
+            'return_book_code' => str()->lower(str()->random(10)),
+            'book_id' => $book->id,
+            'user_id' => auth()->user()->id,
+            'return_date' => Carbon::today(),
+        ]);
+        flashMessage('Buku anda sedang dilakukan pengecekan oleh petugas kami');
+        // return to_route('front.return_books.show', [$return_book->return_book_code]);
+        return to_route('front.loans.show', [$loan->loan_code]);
     }
 }
