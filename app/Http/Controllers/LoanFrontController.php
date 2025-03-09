@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\LoanFrontResource;
+use App\Http\Resources\LoanFrontSingleResource;
 use App\Models\Book;
 use App\Models\Loan;
 use Carbon\Carbon;
@@ -39,6 +40,17 @@ class LoanFrontController extends Controller
                 'search' => request()->search ?? '',
                 'load' => 10,
             ],
+        ]);
+    }
+
+    public function show(Loan $loan): Response
+    {
+        return inertia('Front/Loans/Show', [
+            'page_settings' => [
+                'title' => 'Detail Peminjaman Buku',
+                'subtitle' => 'Dapat melihat informasi detail buku yang anda pinjam',
+            ],
+            'loan' => new LoanFrontSingleResource($loan->load(['book', 'user', 'returnBook'])),
         ]);
     }
 
