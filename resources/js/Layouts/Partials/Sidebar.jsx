@@ -167,7 +167,7 @@ export default function Sidebar({ url, auth }) {
                     />
                     <NavLink url={route('front.loans.index')} active={url.startsWith('/loans')} title="Peminjaman" icon={IconArrowDownCircle} />
                     <NavLink
-                        url="#"
+                        url={route('front.return-books.index')}
                         active={url.startsWith('/return-books')}
                         title="Pengembalian"
                         icon={IconArrowUpCircle}

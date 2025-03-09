@@ -29,8 +29,8 @@ class ReturnBookFrontResource extends JsonResource
             'loan' => $this->whenLoaded('loan', [
                 'id' => $this->loan?->id,
                 'loan_code' => $this->loan?->loan_code,
-                'loan_date' => Carbon::parse($this->loan?->loan_date),
-                'due_date' => Carbon::parse($this->loan?->due_date),
+                'loan_date' => Carbon::parse($this->loan?->loan_date)->format('d M Y'),
+                'due_date' => Carbon::parse($this->loan?->due_date)->format('d M Y'),
             ]),
             'user' => $this->whenLoaded('user', [
                 'id' => $this->user?->id,
