@@ -6,7 +6,7 @@ export default function Show(props) {
         <div className="flex w-full flex-col space-y-12 pb-32">
             <div className="lg:grid lg:grid-cols-12 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10">
                 <div className="lg:col-span-4 lg:row-end-1">
-                    <div className="aspect-h-3 aspect-w-4 overflow-hidden rounded-lg bg-gray-100 max-w-sm">
+                    <div className="aspect-h-3 aspect-w-4 max-w-sm overflow-hidden rounded-lg bg-gray-100">
                         <img src={props.book.cover} alt={props.book.title} />
                     </div>
                 </div>
