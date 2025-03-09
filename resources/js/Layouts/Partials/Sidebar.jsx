@@ -153,7 +153,7 @@ export default function Sidebar({ url, auth }) {
             {/* sidebar member */}
             {auth.role.some((role) => ['member'].includes(role)) && (
                 <>
-                    <NavLink url="#" active={url.startsWith('/books')} title="Buku" icon={IconBooks} />
+                    <NavLink url={route('front.books.index')} active={url.startsWith('/books')} title="Buku" icon={IconBooks} />
                     <NavLink url="#" active={url.startsWith('/categories')} title="Kategori" icon={IconCategory} />
                     <NavLink url="#" active={url.startsWith('/loans')} title="Peminjaman" icon={IconArrowDownCircle} />
                     <NavLink
