@@ -40,7 +40,7 @@ class CategoryFrontController extends Controller
         return inertia('Front/Categories/Show', [
             'page_settings' => [
                 'title' => $category->name,
-                'subtitle' => 'Menampilkan semua buku yang tersedia pada kategori {$category->name} pada platform ini',
+                'subtitle' => "Menampilkan semua buku yang tersedia pada kategori {$category->name} pada platform ini",
             ],
             'books' => BookFrontResource::collection($books)->additional([
                 'meta' => [
