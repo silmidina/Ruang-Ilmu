@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BookFrontSingleResource;
 use App\Http\Resources\CategoryFrontResource;
+use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Inertia\Response;
 
 class BookFrontController extends Controller
 {
@@ -25,6 +28,17 @@ class BookFrontController extends Controller
                 'subtitle' => 'Menampilkan semua buku yang tersedia pada platform ini'
             ],
             'categories' => CategoryFrontResource::collection($categories),
+        ]);
+    }
+
+    public function show(Book $book): Response
+    {
+        return inertia('Front/Books/Show', [
+            'page_settings' => [
+                'title' => $book->title,
+                'subtitle' => 'Menampilkan detail informasi buku {$book->title}',
+            ],
+            'book' => new BookFrontSingleResource($book->load(['category', 'publisher', 'stock']))
         ]);
     }
 }

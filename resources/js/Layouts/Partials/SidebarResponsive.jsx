@@ -156,8 +156,18 @@ export default function SidebarResponsive({ url, auth }) {
                 {/* sidebar member */}
                 {auth.role.some((role) => ['member'].includes(role)) && (
                     <>
-                        <NavLinkResponsive url={route('front.books.index')} active={url.startsWith('/books')} title="Buku" icon={IconBooks} />
-                        <NavLinkResponsive url="#" active={url.startsWith('/categories')} title="Kategori" icon={IconCategory} />
+                        <NavLinkResponsive
+                            url={route('front.books.index')}
+                            active={url.startsWith('/books')}
+                            title="Buku"
+                            icon={IconBooks}
+                        />
+                        <NavLinkResponsive
+                            url="#"
+                            active={url.startsWith('/categories')}
+                            title="Kategori"
+                            icon={IconCategory}
+                        />
                         <NavLinkResponsive
                             url="#"
                             active={url.startsWith('/loans')}
@@ -170,7 +180,12 @@ export default function SidebarResponsive({ url, auth }) {
                             title="Pengembalian"
                             icon={IconArrowUpCircle}
                         />
-                        <NavLinkResponsive url="#" active={url.startsWith('/fines')} title="Denda" icon={IconMoneybag} />
+                        <NavLinkResponsive
+                            url="#"
+                            active={url.startsWith('/fines')}
+                            title="Denda"
+                            icon={IconMoneybag}
+                        />
                     </>
                 )}
 
