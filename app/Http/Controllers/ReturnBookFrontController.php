@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ReturnBookFrontResource;
+use App\Http\Resources\ReturnBookFrontSingleResource;
 use App\Models\Book;
 use App\Models\Loan;
 use App\Models\ReturnBook;
@@ -48,6 +49,25 @@ class ReturnBookFrontController extends Controller
         ]);
     }
 
+    public function show(ReturnBook $returnBook): Response
+    {
+        return inertia('Front/ReturnBooks/Show', [
+            'page_settings' => [
+                'title' => 'Detail Pengembalian Buku',
+                'subtitle' => 'Dapat melihat informasi detail buku yang anda kembalikan',
+            ],
+            'return_book' => new ReturnBookFrontSingleResource(
+                $returnBook->load([
+                    'book',
+                    'user',
+                    'loan',
+                    'fine',
+                    'returnBookCheck'
+                ])
+            )
+        ]);
+    }
+
     public function store(Book $book, Loan $loan): RedirectResponse
     {
         $return_book = $loan->returnBook()->create([
@@ -57,7 +77,7 @@ class ReturnBookFrontController extends Controller
             'return_date' => Carbon::today(),
         ]);
         flashMessage('Buku anda sedang dilakukan pengecekan oleh petugas kami');
-        // return to_route('front.return_books.show', [$return_book->return_book_code]);
-        return to_route('front.loans.show', [$loan->loan_code]);
+        return to_route('front.return_books.show', [$return_book->return_book_code]);
+        // return to_route('front.loans.show', [$loan->loan_code]);
     }
 }

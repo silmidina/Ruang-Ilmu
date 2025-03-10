@@ -45,7 +45,7 @@ export default function Show(props) {
                 />
             </div>
 
-            <Card>
+          <Card>
               <CardHeader className="flex flex-col gap-6 text-sm border-b border-muted lg:flex-row lg:items-center lg:justify-between lg:px-6">
                 <div>
                   <dt className='font-medium text-foreground'>Kode Peminjaman</dt>

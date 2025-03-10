@@ -22,6 +22,7 @@ class ReturnBookFrontSingleResource extends JsonResource
             'status' => $this->status,
             'return_date' => $this->return_date ? Carbon::parse($this->return_date)->format('d M Y') : null,
             'created_at' => $this->created_at->format('d M Y'),
+            'dayslate' => $this->dayslate,
             'book' => $this->whenLoaded('book', [
                 'id' => $this->book?->id,
                 'title' => $this->book?->title,
@@ -32,8 +33,8 @@ class ReturnBookFrontSingleResource extends JsonResource
             'loan' => $this->whenLoaded('loan', [
                 'id' => $this->loan?->id,
                 'loan_code' => $this->loan?->loan_code,
-                'loan_date' => Carbon::parse($this->loan?->loan_date),
-                'due_date' => Carbon::parse($this->loan?->due_date),
+                'loan_date' => Carbon::parse($this->loan?->loan_date)->format('d M Y'),
+                'due_date' => Carbon::parse($this->loan?->due_date)->format('d M Y'),
             ]),
             'user' => $this->whenLoaded('user', [
                 'id' => $this->user?->id,
