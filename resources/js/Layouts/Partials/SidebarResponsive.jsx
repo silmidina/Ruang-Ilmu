@@ -181,7 +181,7 @@ export default function SidebarResponsive({ url, auth }) {
                             icon={IconArrowUpCircle}
                         />
                         <NavLinkResponsive
-                            url="#"
+                            url={route('front.fines.index')}
                             active={url.startsWith('/fines')}
                             title="Denda"
                             icon={IconMoneybag}
