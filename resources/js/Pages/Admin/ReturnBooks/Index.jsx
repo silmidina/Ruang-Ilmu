@@ -8,6 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { UseFilter } from '@/hooks/UseFilter';
 import AppLayout from '@/Layouts/AppLayout';
 import { formatToRupiah } from '@/lib/utils';
+import Approve from '@/Pages/Admin/ReturnBooks/Approve';
 import { Link } from '@inertiajs/react';
 import { IconArrowsDownUp, IconArrowUpCircle, IconEye, IconRefresh } from '@tabler/icons-react';
 import { useState } from 'react';
@@ -219,6 +220,12 @@ export default function Index(props) {
                                                         <IconEye className="size-4" />
                                                     </Link>
                                                 </Button>
+                                            )}
+                                            {return_book.status == 'Pengecekan' && (
+                                                <Approve
+                                                    conditions={props.conditions}
+                                                    action={route('admin.return-books.approve', [return_book])}
+                                                />
                                             )}
                                         </div>
                                     </TableCell>
