@@ -28,20 +28,23 @@ export default function Show(props) {
 
                     <div className="mt-10 flex">
                         {props.book.stock.available > 0 ? (
-                            <Button size="lg" onClick={() => 
-                              router.post(
-                                route('front.loans.store', [props.book.slug]),
-                                {},
-                                {
-                                  preserveScroll: true,
-                                  preserveState: true,
-                                  onSuccess: (success) => {
-                                    const flash = flashMessage(success);
-                                    if (flash) toast[flash.type](flash.message);
-                                  }
+                            <Button
+                                size="lg"
+                                onClick={() =>
+                                    router.post(
+                                        route('front.loans.store', [props.book.slug]),
+                                        {},
+                                        {
+                                            preserveScroll: true,
+                                            preserveState: true,
+                                            onSuccess: (success) => {
+                                                const flash = flashMessage(success);
+                                                if (flash) toast[flash.type](flash.message);
+                                            },
+                                        },
+                                    )
                                 }
-                              )
-                            }>
+                            >
                                 Pinjam Sekarang
                             </Button>
                         ) : (
