@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Midtrans\Config;
 use Exception;
+use Inertia\Response;
 use Midtrans\Snap;
 
 class PaymentController extends Controller
@@ -119,5 +120,10 @@ class PaymentController extends Controller
                     'message' => 'Status transaksi tidak diketahui',
                 ], 400);
         }
+    }
+
+    public function success(): Response
+    {
+        return inertia('Payments/Success');
     }
 }
