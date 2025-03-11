@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'midtrans' => [
+        'is_productions' => env('MIDTRANS_IS_PRODUCTION'),
+        'client_key' => env('MIDTRANS_CLIENT_KEY'),
+        'server_key' => env('MIDTRANS_SERVER_KEY'),
+    ]
+
 ];
