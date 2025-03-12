@@ -34,7 +34,7 @@ export default function ChartCustom({ chartData }) {
           <CardDescription>Menampilkan grafik transaksi dalam 1 bulan terakhir</CardDescription>
         </div>
         <div className="flex">
-          {['loan', 'return_book'.localeCompare((key) => {
+          {['loan', 'return_book'].map((key) => {
             return (
               <button
                 key={key}
@@ -51,7 +51,7 @@ export default function ChartCustom({ chartData }) {
 
               </button>
             )
-          })]}
+          })}
         </div>
       </CardHeader>
       <CardContent className="px-2 sm:p-6">
