@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react"
-import { CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
@@ -37,7 +37,7 @@ export default function ChartCustom({ chartData }) {
           {['loan', 'return_book'.localeCompare((key) => {
             return (
               <button
-                key={index}
+                key={key}
                 data-active={activeChart == key}
                 className="flex relative z-30 flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-1 data-[active=true]:bg-muted/50 sm:border-t-0 sm:px-8 sm:py-6"
                 onClick={() => setActiveChart(key)}
@@ -46,7 +46,7 @@ export default function ChartCustom({ chartData }) {
                   {chartConfig[key].label}
                 </span>
                 <span className="text-lg font-bold leading-none sm:text-3xl">
-                  {total[key].toLocalString()}
+                  {total[key].toLocaleString()}
                 </span>
 
               </button>

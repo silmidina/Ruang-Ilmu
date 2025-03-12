@@ -11,7 +11,7 @@ import { IconEye, IconMoneybag } from '@tabler/icons-react';
 
 export default function Index(props) {
     const { data: fines, meta } = props.fines;
-    console.log(fines)
+    // console.log(fines)
     return (
         <div className="flex w-full flex-col space-y-4 pb-32">
             <div className="flex flex-col items-start justify-between gap-y-4 lg:flex-row lg:items-center">
