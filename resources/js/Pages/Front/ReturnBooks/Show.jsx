@@ -158,7 +158,7 @@ export default function Show(props) {
                                         <TableHead>Denda Lain-lain</TableHead>
                                         <TableHead>Total Denda</TableHead>
                                         <TableHead>Status Pembayaran</TableHead>
-                                        {props.return_book.fine.payment_status !== 'Sukses' && (
+                                        {props.return_book.fine.payment_status !== 'Berhasil' && (
                                             <TableHead>Opsi</TableHead>
                                         )}
                                     </TableRow>
