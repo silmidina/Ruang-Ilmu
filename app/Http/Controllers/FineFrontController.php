@@ -5,12 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Resources\FineFrontResource;
 use App\Models\Fine;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class FineFrontController extends Controller
+class FineFrontController extends Controller implements HasMiddleware
 {
     /**
      * Handle the incoming request.
      */
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('password.confirm', except: ['store']),
+        ];
+    }
+
     public function __invoke(Request $request)
     {
         $fines = Fine::query()
