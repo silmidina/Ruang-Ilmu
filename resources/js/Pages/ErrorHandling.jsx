@@ -1,5 +1,5 @@
 import { Button } from "@/Components/ui/button";
-import { Card } from "@/Components/ui/card";
+import { Card, CardContent } from "@/Components/ui/card";
 import { messages } from "@/lib/utils";
 import { Head, Link } from "@inertiajs/react";
 
