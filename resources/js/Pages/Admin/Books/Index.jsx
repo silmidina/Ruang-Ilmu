@@ -28,6 +28,7 @@ import { toast } from 'sonner';
 export default function Index(props) {
     const { data: books, meta } = props.books;
     const [params, setParams] = useState(props.state);
+    // console.log(books);
 
     const onSortable = (field) => {
         setParams({
@@ -264,7 +265,7 @@ export default function Index(props) {
                                     <TableCell>{book.language}</TableCell>
                                     <TableCell>{book.number_of_pages}</TableCell>
                                     <TableCell>{book.status}</TableCell>
-                                    <TableCell>Rp. {book.price}</TableCell>
+                                    <TableCell>Rp {book.price}</TableCell>
                                     <TableCell>
                                         <Avatar>
                                             <AvatarImage src={book.cover} />

@@ -65,7 +65,7 @@ export default function Index(props) {
                         <TableBody>
                             <TableRow>
                                 <TableCell>{props.return_book.user.name}</TableCell>
-                                <TableCell>{props.return_book.user.title}</TableCell>
+                                <TableCell>{props.return_book.book.title}</TableCell>
                                 <TableCell>
                                     {formatToRupiah(props.return_book.fine.late_fee)}
                                     <span className="text-red-500">({props.return_book_dayslate})</span>

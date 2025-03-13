@@ -19,11 +19,11 @@ class FineResource extends JsonResource
             'id' => $this->id,
             'late_fee' => $this->late_fee,
             'other_fee' => $this->other_fee,
-            'total_feee' => $this->total_feee,
+            'total_fee' => $this->total_fee,
             'payment_status' => $this->payment_status,
             'loan' => $this->whenLoaded('returnBook', [
-                'id' => $this->returnBook?->laon?->id,
-                'loan_code' => $this->returnBook?->laon?->loan_code,
+                'id' => $this->returnBook?->loan?->id,
+                'loan_code' => $this->returnBook?->loan?->loan_code,
                 'loan_date' => Carbon::parse($this->returnBook?->loan->loan_date)->format('d M Y'),
                 'due_date' => Carbon::parse($this->returnBook?->loan->due_date)->format('d M Y'),
             ]),
@@ -31,10 +31,10 @@ class FineResource extends JsonResource
                 'return_book_code' => $this->returnBook?->return_book_code,
                 'return_date' => Carbon::parse($this->returnBook?->return_date)->format('d M Y'),
             ]),
-            'user' => [
+            'user' => $this->whenLoaded('user', [
                 'id' => $this->user?->id,
                 'name' => $this->user?->name,
-            ],
+            ]),
         ];
     }
 }

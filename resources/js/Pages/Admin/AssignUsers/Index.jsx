@@ -107,7 +107,7 @@ export default function Index(props) {
                                         </span>
                                     </Button>
                                 </TableHead>
-                                <TableHead>Roles</TableHead>
+                                <TableHead>Peran</TableHead>
                                 <TableHead>Opsi</TableHead>
                             </TableRow>
                         </TableHeader>

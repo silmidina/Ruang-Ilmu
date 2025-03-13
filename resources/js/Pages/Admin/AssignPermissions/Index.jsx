@@ -95,7 +95,7 @@ export default function Index(props) {
                                         </span>
                                     </Button>
                                 </TableHead>
-                                <TableHead>Permissions</TableHead>
+                                <TableHead>Izin</TableHead>
                                 <TableHead>Opsi</TableHead>
                             </TableRow>
                         </TableHeader>

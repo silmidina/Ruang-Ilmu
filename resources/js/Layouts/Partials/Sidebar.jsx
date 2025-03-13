@@ -199,7 +199,7 @@ export default function Sidebar({ url, auth }) {
             )}
             <NavLink
                 url={route('profile.edit')}
-                active={url.startsWith('/admin/profile')}
+                active={url.startsWith('/profile')}
                 title="Profile"
                 icon={IconUser}
             />

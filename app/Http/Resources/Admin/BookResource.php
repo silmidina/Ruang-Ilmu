@@ -27,7 +27,7 @@ class BookResource extends JsonResource
             'number_of_pages' => $this->number_of_pages,
             'status' => $this->status,
             'cover' => $this->cover ? Storage::url($this->cover) : null,
-            'prive' => number_format($this->price, 0, ',', '-'),
+            'price' => number_format($this->price, 0, ',', '.'),
             'created_at' => $this->created_at->format('d M Y'),
             'category' => [
                 'id' => $this->category?->id,
