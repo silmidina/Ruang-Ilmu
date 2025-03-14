@@ -74,14 +74,14 @@ export default function AppLayout({ title, children }) {
                                     </Avatar>
                                 </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
+                            {/* <DropdownMenuContent align="end">
                                 <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem>Profile</DropdownMenuItem>
                                 <DropdownMenuItem asChild>
-                                    <Link href="#">Logout</Link>
+                                    <Link href={route('logout')}>Logout</Link>
                                 </DropdownMenuItem>
-                            </DropdownMenuContent>
+                            </DropdownMenuContent> */}
                         </DropdownMenu>
                     </header>
                     <main className="w-full">

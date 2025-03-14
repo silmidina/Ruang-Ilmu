@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/Components/ui/select';
+import { Textarea } from '@/Components/ui/textarea';
 import AppLayout from '@/Layouts/AppLayout';
 import { flashMessage } from '@/lib/utils';
 import { Link, useForm } from '@inertiajs/react';
@@ -18,6 +19,7 @@ export default function Edit(props) {
     const { data, setData, reset, post, processing, errors } = useForm({
         name: props.user.name ?? '',
         email: props.user.email ?? '',
+        phone: props.user.phone ?? '',
         password: '',
         password_confirmation: '',
         avatar: null,
@@ -123,6 +125,28 @@ export default function Edit(props) {
                                 onChange={onHandleChange}
                             />
                             {errors.phone && <InputError message={errors.phone} />}
+                        </div>
+                        <div className="grid w-full items-center gap-1.5">
+                            <Label htmlFor="address">Alamat</Label>
+                            <Textarea
+                                name="address"
+                                id="address"
+                                placeholder="Masukkan alamat..."
+                                value={data.address}
+                                onChange={onHandleChange}
+                            ></Textarea>
+                            {errors.address && <InputError message={errors.address} />}
+                        </div>
+                        <div className="grid w-full items-center gap-1.5">
+                            <Label htmlFor="date_of_birth">Tanggal Lahir</Label>
+                            <Input
+                                name="date_of_birth"
+                                id="date_of_birth"
+                                type="date"
+                                value={data.date_of_birth}
+                                onChange={onHandleChange}
+                            />
+                            {errors.date_of_birth && <InputError message={errors.date_of_birth} />}
                         </div>
                         <div className="5 grid w-full items-center gap-1">
                             <Label htmlFor="cover">Cover</Label>

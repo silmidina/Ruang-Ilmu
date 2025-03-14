@@ -36,7 +36,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         <Input id="name" name="name" value={data.name} onChange={onHandleChange} autoComplete="name" />
                         {errors.name && <InputError className="mt-2" message={errors.name} />}
                     </div>
-
                     <div>
                         <Label htmlFor="email">Email</Label>
                         <Input
@@ -44,7 +43,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                             name="email"
                             type="email"
                             value={data.email}
-                            onChange={onHandleSubmit}
+                            onChange={onHandleChange}
                             autoComplete="username"
                         />
                         {errors.email && <InputError className="mt-2" message={errors.email} />}

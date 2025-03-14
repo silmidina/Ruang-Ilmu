@@ -80,6 +80,7 @@ class UserRequest extends FormRequest
             'avatar' => 'Avatar',
             'date_of_birth' => 'Tanggal Lahir',
             'address' => 'Alamat',
+            'created_at' => 'Dibuat Pada',
         ];
     }
 }

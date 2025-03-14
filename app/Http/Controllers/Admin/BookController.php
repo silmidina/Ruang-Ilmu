@@ -23,7 +23,7 @@ class BookController extends Controller
     public function index(): Response
     {
         $books = Book::query()
-            ->select(['id', 'book_code', 'title', 'slug', 'author', 'publication_year', 'isbn', 'language', 'number_of_pages', 'status', 'price', 'category_id', 'publisher_id', 'created_at'])
+            ->select(['id', 'book_code', 'title', 'slug', 'author', 'publication_year', 'isbn', 'language', 'number_of_pages', 'status', 'price', 'category_id', 'publisher_id', 'created_at', 'cover'])
             ->filter(request()->only(['search']))
             ->sorting(request()->only(['field', 'direction']))
             ->with(['category', 'stock', 'publisher'])
@@ -125,7 +125,7 @@ class BookController extends Controller
         return inertia('Admin/Books/Edit', [
             'page_settings' => [
                 'title' => 'Edit Buku',
-                'subtitle' => 'Edit data buku baru di sini. Klik simpan setelah selesai.',
+                'subtitle' => 'Edit buku di sini. Klik simpan setelah selesai.',
                 'method' => 'PUT',
                 'action' => route('admin.books.update', $book),
             ],
@@ -154,14 +154,17 @@ class BookController extends Controller
                     $request->category_id,
                 ),
                 'title' => $title = $request->title,
-                'slug' => $title === $book->name ? str()->lower(str()->slug($title) . str()->random(4)) : $book->slug,
+                'slug' => $title === $book->title ? str()->lower(str()->slug($title) . str()->random(4)) : $book->slug,
                 'author' => $request->author,
                 'publication_year' => $request->publication_year,
                 'isbn' => $request->isbn,
                 'language' => $request->language,
                 'synopsis' => $request->synopsis,
                 'number_of_pages' => $request->number_of_pages,
-                'status' => $request->total > 0 ? BookStatus::AVAILABLE->value : BookStatus::UNAVAILABLE->value,
+                'status' => $request->has('total')
+                    ? ($request->total > 0 ? BookStatus::AVAILABLE->value : BookStatus::UNAVAILABLE->value)
+                    : $book->status,
+
                 'cover' => $this->update_file($request, $book, 'cover', 'books'),
                 'price' => $request->price,
                 'category_id' => $request->category_id,

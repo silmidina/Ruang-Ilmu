@@ -28,6 +28,7 @@ import { toast } from 'sonner';
 export default function Index(props) {
     const { data: users, meta } = props.users;
     const [params, setParams] = useState(props.state);
+    // console.log(users);
 
     const onSortable = (field) => {
         setParams({
@@ -182,6 +183,18 @@ export default function Index(props) {
                                         onClick={() => onSortable('address')}
                                     >
                                         Alamat
+                                        <span className="ml-2 flex-none rounded text-muted-foreground">
+                                            <IconArrowsDownUp className="size-4 text-muted-foreground" />
+                                        </span>
+                                    </Button>
+                                </TableHead>
+                                <TableHead>
+                                    <Button
+                                        variant="ghost"
+                                        className="group inline-flex"
+                                        onClick={() => onSortable('created_at')}
+                                    >
+                                        Dibuat Pada
                                         <span className="ml-2 flex-none rounded text-muted-foreground">
                                             <IconArrowsDownUp className="size-4 text-muted-foreground" />
                                         </span>
